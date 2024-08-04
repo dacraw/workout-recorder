@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+MuscleGroup.create name: "Abs"
+MuscleGroup.create name: "Arms"
+MuscleGroup.create name: "Back"
+MuscleGroup.create name: "Cardio"
+MuscleGroup.create name: "Chest"
+MuscleGroup.create name: "Legs"
+MuscleGroup.create name: "Shoulders"
