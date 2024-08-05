@@ -1,8 +1,7 @@
 <nav>
-    <ol class="flex gap-x-10 hidden md:flex justify-end mr-6 mt-6">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Workouts", workouts_path %></li>
-    </ol>
+    <div class="flex gap-x-10 hidden md:flex justify-end mr-6 mt-6">
+        <%= render "header_links" %>
+    </div>
 
     <%= render 'header_dropdown' %>
 </nav> 
