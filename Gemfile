@@ -10,6 +10,10 @@ gem "sprockets-rails"
 
 gem "pg", "~> 1.1"
 
+gem "tailwindcss-rails"
+
+gem "font-awesome-sass"
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
@@ -66,3 +70,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "dartsass-rails", "~> 0.5.1"
