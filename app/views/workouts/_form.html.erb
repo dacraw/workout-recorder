@@ -23,7 +23,7 @@
 
   <div>
     <%= form.label :muscle_group, style: "display: block" %>
-    <%= form.text_field :muscle_group %>
+    <%= collection_select(:workout, :muscle_group_id, MuscleGroup.all, :id, :name) %>
   </div>
 
   <div>
