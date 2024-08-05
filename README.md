@@ -27,3 +27,4 @@ Things you may want to cover:
 
 - set `mailer_sender` in `config/initializers/devise.rb`
 - set `config.action_mailer.default_url_options` in `config/environments/production.rb`
+- customize devise views by running `rails g devise:views`
