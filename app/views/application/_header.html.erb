@@ -1,8 +1,7 @@
 <nav>
     <div class="flex gap-x-10 hidden md:flex justify-end mr-6 mt-6">
         <%= render "header_links" %>
-        <%= button_to("Log Out", destroy_user_session_path, method: :delete) %>
-        <%= link_to "Sign In", new_user_session_path %>
+        <%= render "user_session_links" %>
     </div>
 
     <%= render 'header_dropdown' %>

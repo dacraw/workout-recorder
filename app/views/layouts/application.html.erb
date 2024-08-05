@@ -13,10 +13,14 @@
 
   <body>
     <%= render "header" %>
-    
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+    <div class="my-6">
+      <p class="notice px-6"><%= notice %></p>
+      <p class="alert px-6"><%= alert %></p>
+    </div>
+
+    <div class="px-6">
+      <%= yield %>
+    <div>
   </body>
 </html>
