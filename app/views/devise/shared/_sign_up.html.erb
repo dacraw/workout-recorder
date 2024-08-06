@@ -1,0 +1,6 @@
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to new_registration_path(resource_name), class: "flex items-center gap-2" do %>
+    <i class="fa-solid fa-user-pen"></i>
+    <span>Sign up</span>
+  <% end %>
+<% end %>
