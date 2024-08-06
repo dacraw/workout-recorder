@@ -15,8 +15,11 @@
     <%= render "header" %>
 
     <div class="my-6">
-      <p class="notice px-6"><%= notice %></p>
-      <p class="alert px-6"><%= alert %></p>
+      <% if notice %>
+        <p class="notice px-6"><%= notice %></p>
+      <% elsif alert %>
+        <p class="alert px-6"><%= alert %></p>
+      <% end %>
     </div>
 
     <div class="px-6">
