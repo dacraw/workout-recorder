@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_workout, only: %i[ show edit update destroy ]
-
   # GET /workouts or /workouts.json
   def index
     @workouts = Workout.all

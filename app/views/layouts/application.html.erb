@@ -14,6 +14,16 @@
   <body>
     <%= render "header" %>
 
-    <%= yield %>
+    <div class="my-6">
+      <% if notice %>
+        <p class="notice px-6"><%= notice %></p>
+      <% elsif alert %>
+        <p class="alert px-6"><%= alert %></p>
+      <% end %>
+    </div>
+
+    <div class="px-6">
+      <%= yield %>
+    <div>
   </body>
 </html>
