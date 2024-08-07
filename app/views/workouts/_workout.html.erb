@@ -1,17 +1,17 @@
 <div id="<%= dom_id workout %>">
+  <p><span class="font-bold">Date:</span> <span> <%= time_ago_in_words workout.created_at %> ago</p>
   <p>
-    <strong>Name:</strong>
+    <span class="font-bold">Name:</span>
     <%= workout.name %>
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <span class="font-bold">Description:</span>
     <%= workout.description %>
   </p>
 
   <p>
-    <strong>Muscle group:</strong>
+    <span class="font-bold">Muscle group:</span>
     <%= workout.muscle_group.name %>
   </p>
-
 </div>
