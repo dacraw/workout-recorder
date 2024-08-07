@@ -19,4 +19,4 @@ test:
 
 production:
   <<: *default
-  database: workout_recorder_production
+  url: <%= Rails.application.credentials.dig(:db, :connection_string) %>
