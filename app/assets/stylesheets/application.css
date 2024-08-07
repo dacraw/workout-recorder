@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+input,
+select {
+  color: black;
+}
+
+input[type="submit"] {
+  color: white;
+}
