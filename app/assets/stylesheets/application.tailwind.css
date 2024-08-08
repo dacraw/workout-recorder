@@ -4,7 +4,7 @@
 
 @layer components {
   .btn-primary {
-    @apply border-2 px-6 py-2 my-4 cursor-pointer inline-flex items-center gap-6 pointer-cursor;
+    @apply border-2 px-6 py-2 my-4 cursor-pointer inline-flex items-center gap-6;
   }
   .page-header {
     @apply text-4xl mb-6;

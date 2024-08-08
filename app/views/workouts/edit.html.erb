@@ -4,7 +4,7 @@
 
 <br>
 
-<div>
-  <%= link_to "Show this workout", @workout %> |
-  <%= link_to "Back to workouts", workouts_path %>
+<div class="inline-flex flex-col">
+  <%= render "workouts_destroy_link", workout: @workout, show_text: true %>
+  <%= render "workouts_index_link" %>
 </div>
