@@ -1,9 +1,9 @@
-<h1>New workout</h1>
+<h1 class="page-header">New workout</h1>
 
 <%= render "form", workout: @workout %>
 
 <br>
 
 <div>
-  <%= link_to "Back to workouts", workouts_path %>
+  <%= render "workouts_index_link" %>
 </div>

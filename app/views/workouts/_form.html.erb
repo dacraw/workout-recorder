@@ -27,6 +27,20 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.button type: :submit, class: "btn-primary" do %>
+      <% if workout.new_record? %>
+        <span>Create Workout</span>
+        <div>
+          <i class="fa-solid fa-square-plus"></i>
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+      <% else %>
+        <span>Update Workout</span>
+        <div>
+          <i class="fa-solid fa-circle-check"></i>
+          <i class="fa-solid fa-dumbbell"></i>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 <% end %>

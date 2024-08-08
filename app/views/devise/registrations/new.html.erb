@@ -1,4 +1,4 @@
-<h1 class="text-4xl mb-6">Sign up</h1>
+<h1 class="page-header">Sign up</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -21,8 +21,8 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions my-6 relative inline-block w-full">
-    <%= f.button :submit, class: "border-2 px-6 py-2 cursor-pointer flex items-center gap-6" do %>
+  <div class="actions">
+    <%= f.button :submit, class: "btn-primary" do %>
       <span>Create Account</span>
       <i class="fa-solid fa-user-plus"></i>
     <% end %>

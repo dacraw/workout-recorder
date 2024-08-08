@@ -1,12 +1,24 @@
-<h1>Workouts</h1>
+<%= link_to new_workout_path, class: "btn-primary mb-4" do %>
+  <span>Add A Workout</span>
+  <div>
+    <i class="fa-solid fa-square-plus"></i>
+    <i class="fa-solid fa-dumbbell"></i>
+  </div>
+<% end %>
+
+<h1 class="page-header">Workout Log</h1>
 
 <div id="workouts">
-  <% @workouts.each do |workout| %>
-    <%= render workout %>
-    <p>
-      <%= link_to "Show this workout", workout %>
-    </p>
+  <% @workouts.order(created_at: :desc).each do |workout| %>
+    <div class="mb-4">
+        <%= render workout %>
+        <div>
+          <%= render "workouts_show_link", workout: workout %>
+
+          <%= render "workouts_edit_link", workout: workout %>
+
+          <%= render "workouts_destroy_link", workout: workout %>
+        </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New workout", new_workout_path %>

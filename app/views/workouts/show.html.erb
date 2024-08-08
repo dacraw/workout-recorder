@@ -1,8 +1,11 @@
-<%= render @workout %>
+<h1 class="page-header">View Workout</h1>
 
-<div>
-  <%= link_to "Edit this workout", edit_workout_path(@workout) %> |
-  <%= link_to "Back to workouts", workouts_path %>
+<div class="mb-4">
+  <%= render @workout %>
+</div>
 
-  <%= button_to "Destroy this workout", @workout, method: :delete %>
+<div class="inline-flex flex-col">
+  <%= render "workouts_edit_link", workout: @workout, show_text: true %>
+  <%= render "workouts_index_link" %>
+  <%= render "workouts_destroy_link", workout: @workout, show_text: true %>
 </div>
