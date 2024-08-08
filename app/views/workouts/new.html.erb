@@ -1,9 +1,12 @@
-<h1>New workout</h1>
+<h1 class="page-header">New workout</h1>
 
 <%= render "form", workout: @workout %>
 
 <br>
 
 <div>
-  <%= link_to "Back to workouts", workouts_path %>
+  <%= link_to workouts_path do %>
+    <i class="fa-solid fa-circle-left"></i>
+    <span>Back to workouts</span>
+  <% end %>
 </div>
