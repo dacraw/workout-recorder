@@ -1,2 +1,19 @@
-<h1>Pages#home</h1>
-<h3><%= link_to "Add New Workout", new_workout_path %></h3>
+<h1 class="page-header">Let's Analyze Your Workouts!</h1>
+<p>
+    <%= link_to workouts_path, class: "btn-primary" do %>
+        <span>View Workout Log</span>
+        <span>
+            <i class="fa-solid fa-eye"></i>
+            <i class="fa-regular fa-file"></i>
+        </span>
+    <% end %>
+</p>
+<p>
+    <%= link_to new_workout_path, class: "btn-primary" do %>
+        <span>Add New Workout</span>
+        <span>
+            <i class="fa-solid fa-square-plus"></i>
+            <i class="fa-solid fa-dumbbell"></i>
+        </span>
+    <% end %>
+</p>
