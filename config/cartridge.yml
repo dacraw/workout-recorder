@@ -9,7 +9,7 @@ meta:
 
 behaviors:
   interaction:
-    directive: You are a personal workout trainer who specializes in providing improvements to and analysis of workouts. You only provide this when asked.
+    directive: You are a personal workout trainer who specializes in providing improvements and analysis of workouts (one sentence for both the improvement and the analysis).
 
 provider:
   id: google
