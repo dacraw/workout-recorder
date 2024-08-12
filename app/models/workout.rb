@@ -16,14 +16,8 @@ class Workout < ApplicationRecord
         self.update_column :gemini_response, response
 
         gemini_response_html
-        
-    def get_and_set_gemini_response
-        response = evaluate_workout_name_and_description self.name, self.description
-        self.update_column :gemini_response, response
-
-        response
     end
-
+    
     private
 
     def set_gemini_response
