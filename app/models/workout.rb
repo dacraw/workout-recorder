@@ -3,7 +3,8 @@ class Workout < ApplicationRecord
     
     belongs_to :muscle_group
 
-    before_create :set_gemini_response
+    # TODO: Only call this is name/description field changes to minimize Google API calls
+    before_save :set_gemini_response
 
     def gemini_response_html
         markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
