@@ -17,4 +17,20 @@ module GeminiAssistant
         HEREDOC
         )
     end
+
+    def evaluate_workout_name_and_description(name, description)
+        if !name || ! description
+            puts "Missing name and/or description"
+            return
+        end
+
+        bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
+
+        bot.eval(
+            <<-HEREDOC
+                workout name: #{name}
+                workout description: #{description}
+            HEREDOC
+        )
+    end
 end

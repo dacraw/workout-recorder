@@ -162,9 +162,6 @@ GEM
     irb (1.14.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    jbuilder (2.12.0)
-      actionview (>= 5.0.0)
-      activesupport (>= 5.0.0)
     jwt (2.8.2)
       base64
     logger (1.6.0)
@@ -363,7 +360,6 @@ DEPENDENCIES
   dockerfile-rails (>= 1.6)
   error_highlight (>= 0.4.0)
   importmap-rails
-  jbuilder
   nano-bots (~> 3.4.0)
   pg (~> 1.1)
   puma (>= 5.0)
@@ -371,7 +367,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails
+  tailwindcss-rails (~> 2.6.5)
   turbo-rails
   tzinfo-data
   web-console
