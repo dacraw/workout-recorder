@@ -14,4 +14,12 @@
     <span class="font-bold">Muscle group:</span>
     <%= workout.muscle_group.name %>
   </p>
+
+  <div>
+    <% if workout.gemini_response.present? %>
+      <%= sanitize workout.gemini_response_html %>
+    <% else %>
+      <%= sanitize workout.get_and_set_gemini_response_html %>
+    <% end %>
+  </div>
 </div>
