@@ -1,0 +1,10 @@
+<h1 class="page-header">Editing Exercise</h1>
+
+<%= render "form", exercise: @exercise %>
+
+<br>
+
+<div class="inline-flex flex-col">
+  <%= render "exercises_destroy_link", exercise: @exercise, show_text: true %>
+  <%= render "exercises_index_link" %>
+</div>

@@ -1,0 +1,20 @@
+<div id="<%= dom_id exercise %>">
+  <p><span class="font-bold">Date:</span> <span> <%= time_ago_in_words exercise.created_at %> ago</p>
+  <p>
+    <span class="font-bold">Name:</span>
+    <%= exercise.name %>
+  </p>
+
+  <p>
+    <span class="font-bold">Description:</span>
+    <%= exercise.description %>
+  </p>
+
+  <div>
+    <% if exercise.gemini_response.present? %>
+      <%= sanitize exercise.gemini_response_html %>
+    <% else %>
+      <%= sanitize exercise.get_and_set_gemini_response_html %>
+    <% end %>
+  </div>
+</div>

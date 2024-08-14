@@ -1,10 +1,10 @@
-<%= form_with(model: workout) do |form| %>
-  <% if workout.errors.any? %>
+<%= form_with(model: exercise) do |form| %>
+  <% if exercise.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
+      <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
 
       <ul>
-        <% workout.errors.each do |error| %>
+        <% exercise.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -22,20 +22,15 @@
   </div>
 
   <div>
-    <%= form.label :muscle_group, style: "display: block" %>
-    <%= collection_select(:workout, :muscle_group_id, MuscleGroup.all, :id, :name) %>
-  </div>
-
-  <div>
     <%= form.button type: :submit, class: "btn-primary" do %>
-      <% if workout.new_record? %>
-        <span>Create Workout</span>
+      <% if exercise.new_record? %>
+        <span>Create Exercise</span>
         <div>
           <i class="fa-solid fa-square-plus"></i>
           <i class="fa-solid fa-dumbbell"></i>
         </div>
       <% else %>
-        <span>Update Workout</span>
+        <span>Update Exercise</span>
         <div>
           <i class="fa-solid fa-circle-check"></i>
           <i class="fa-solid fa-dumbbell"></i>
