@@ -1,24 +1,24 @@
 module GeminiAssistant
-    def evaluate_workout(workout_id)
+    def evaluate_exercise(exercise_id)
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
-        workout = Workout.find_by id: workout_id
+        exercise = Exercise.find_by id: exercise_id
 
-        if !workout.present?
-            throw "No workout found"
+        if !exercise.present?
+            throw "No exercise found"
         end
 
-        workout_name = workout.name
-        workout_description = workout.description
+        exercise_name = exercise.name
+        exercise_description = exercise.description
 
         bot.eval(<<-HEREDOC
-            workout name: #{workout_name}
-            workout description: #{workout_description}
+            exercise name: #{exercise_name}
+            exercise description: #{exercise_description}
         HEREDOC
         )
     end
 
-    def evaluate_workout_name_and_description(name, description)
+    def evaluate_exercise_name_and_description(name, description)
         if !name || ! description
             puts "Missing name and/or description"
             return
@@ -28,8 +28,8 @@ module GeminiAssistant
 
         bot.eval(
             <<-HEREDOC
-                workout name: #{name}
-                workout description: #{description}
+                exercise name: #{name}
+                exercise description: #{description}
             HEREDOC
         )
     end

@@ -1,0 +1,24 @@
+<%= link_to new_exercise_path, class: "btn-primary mb-4" do %>
+  <span>Add A Exercise</span>
+  <div>
+    <i class="fa-solid fa-square-plus"></i>
+    <i class="fa-solid fa-dumbbell"></i>
+  </div>
+<% end %>
+
+<h1 class="page-header">Exercise Log</h1>
+
+<div id="exercises">
+  <% @exercises.order(created_at: :desc).each do |exercise| %>
+    <div class="mb-4 border-2 p-2">
+        <%= render exercise %>
+        <div class="mt-2">
+          <%= render "exercises_show_link", exercise: exercise %>
+
+          <%= render "exercises_edit_link", exercise: exercise %>
+
+          <%= render "exercises_destroy_link", exercise: exercise %>
+        </div>
+    </div>
+  <% end %>
+</div>

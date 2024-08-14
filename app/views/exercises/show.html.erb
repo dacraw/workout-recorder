@@ -1,0 +1,11 @@
+<h1 class="page-header">View Exercise</h1>
+
+<div class="mb-4">
+  <%= render @exercise %>
+</div>
+
+<div class="inline-flex flex-col">
+  <%= render "exercises_edit_link", exercise: @exercise, show_text: true %>
+  <%= render "exercises_index_link" %>
+  <%= render "exercises_destroy_link", exercise: @exercise, show_text: true %>
+</div>
