@@ -17,7 +17,7 @@ class Workout < ApplicationRecord
 
         gemini_response_html
     end
-
+    
     private
 
     def set_gemini_response

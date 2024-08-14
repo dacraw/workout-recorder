@@ -19,13 +19,15 @@ ENV BUNDLE_DEPLOYMENT="1" \
 RUN gem update --system --no-document && \
     gem install -N bundler
 
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential libpq-dev
+
+# Nanobot Gemini AI dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential libffi-dev libsodium-dev lua5.4-dev curl
 
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
@@ -47,8 +49,9 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 FROM base
 
 # Install packages needed for deployment
+# NOTE: This reinstalls dependencies for NanoBot, specifically the libsodium-dev package to solve an issue with changing from `build` to `base` ; ideally, copy contents of that install from `build` into `base` instead of reinstalling NanoBot dependencies below (similar to how the BUNDLE_PATH and `/rails` directories are copied after this step below)
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl postgresql-client && \
+    apt-get install --no-install-recommends -y curl postgresql-client build-essential libffi-dev libsodium-dev lua5.4-dev  && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
