@@ -5,6 +5,6 @@
 <br>
 
 <div class="inline-flex flex-col">
-  <%= render "exercises_destroy_link", exercise: @exercise, show_text: true %>
-  <%= render "exercises_index_link" %>
+  <%= render "exercises_destroy_link", workout: @workout, exercise: @exercise, show_text: true %>
+  <%= render "workouts/workouts_index_link", workout: @workout %>
 </div>

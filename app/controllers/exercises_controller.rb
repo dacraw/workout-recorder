@@ -1,7 +1,9 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_exercise, only: %i[ show edit update destroy ]
+  before_action :set_workout
   before_action :check_author, except: [:index, :show]
+
   # GET /exercises or /exercises.json
   def index
     @exercises = Exercise.all
@@ -41,7 +43,7 @@ class ExercisesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        format.html { redirect_to exercise_url(@exercise), notice: "Exercise was successfully updated." }
+        format.html { redirect_to workout_exercise_url(@workout, @exercise), notice: "Exercise was successfully updated." }
         format.json { render :show, status: :ok, location: @exercise }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +57,7 @@ class ExercisesController < ApplicationController
     @exercise.destroy!
 
     respond_to do |format|
-      format.html { redirect_to exercises_url, notice: "Exercise was successfully destroyed." }
+      format.html { redirect_to workout_path(@workout), notice: "Exercise was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +68,10 @@ class ExercisesController < ApplicationController
       @exercise = Exercise.find(params[:id])
     end
 
+    def set_workout
+      @workout = Workout.find params[:workout_id] if params[:workout_id]
+    end
+
     # Only allow a list of trusted parameters through.
     def exercise_params
       params.require(:exercise).permit(:name, :description)
@@ -73,6 +79,6 @@ class ExercisesController < ApplicationController
 
     def check_author
       workout = Workout.find params[:workout_id]
-      redirect_to exercise_path @exercise if current_user != workout.user
+      redirect_to exercise_path params[:id] if current_user != workout.user
     end
 end

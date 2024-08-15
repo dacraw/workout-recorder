@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :exercises
-
   resources :workouts, only: [:create, :new, :show] do
     resources :exercises
   end

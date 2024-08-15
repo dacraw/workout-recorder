@@ -20,7 +20,7 @@ class WorkoutsController < ApplicationController
 
     def show
         @workout = Workout.find params[:id]
-        @exercises = @workout.exercises
+        @exercises = @workout.exercises.order(created_at: :desc)
     end
 
     def my_workouts
