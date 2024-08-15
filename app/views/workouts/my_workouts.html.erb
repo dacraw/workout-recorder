@@ -1,14 +1,15 @@
 <h1 class="page-header">My Workouts</h1>
 
-<div>
+<div data-controller="dropdown">
     <% @workouts.each do |workout| %>
-        <%= button_tag workout.date, class: "block text-xl mb-4 text-blue-400 hover:underline" %>
-        <div>
+        <%= button_tag workout.date, class: "block text-xl mb-4 text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
+        <div class="hidden">
             <% workout.exercises.each do |exercise| %>
                 <%= render "exercises/exercise", exercise: exercise %>
             <% end %>
+            
+            <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary" %></p>
         </div>
 
-        <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary" %></p>
     <% end %>
 </div>
