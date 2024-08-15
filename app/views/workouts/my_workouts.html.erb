@@ -1,4 +1,7 @@
 <h1 class="page-header">My Workouts</h1>
 <% @workouts.each do |workout| %>
     <p>Date: <%= workout.date %></p>
+    <% workout.exercises.each do |exercise| %>
+        <%= render "exercises/exercise", exercise: exercise %>
+    <% end %>
 <% end %>

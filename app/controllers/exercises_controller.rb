@@ -12,6 +12,7 @@ class ExercisesController < ApplicationController
 
   # GET /exercises/new
   def new
+    @workout = Workout.find params[:workout_id]
     @exercise = Exercise.new
   end
 
@@ -22,7 +23,8 @@ class ExercisesController < ApplicationController
   # POST /exercises or /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
-
+    @exercise.workout_id = params[:workout_id]
+    
     respond_to do |format|
       if @exercise.save
         format.html { redirect_to exercise_url(@exercise), notice: "Exercise was successfully created." }

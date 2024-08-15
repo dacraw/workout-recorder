@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   resources :exercises
 
+  resources :workouts, only: [:show] do
+    resources :exercises
+  end
   get "my_workouts", to: "workouts#my_workouts"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

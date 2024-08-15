@@ -1,0 +1,11 @@
+<h1 class="page-header">View Workout</h1>
+
+<%= link_to "Add Exercise", new_workout_exercise_path(@workout), class:"btn-primary" %>
+<p>Workout Date: <%= @workout.date %>
+
+<div>
+    <% @workout.exercises.each do |exercise| %>
+        <p><%= exercise.name %></p>
+        <%= render "exercises/exercise", exercise: exercise %>
+    <% end %>
+</div>
