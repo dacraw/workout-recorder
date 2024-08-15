@@ -72,6 +72,7 @@ class ExercisesController < ApplicationController
     end
 
     def check_author
-      redirect_to exercise_path @exercise if current_user != @exercise.user
+      workout = Workout.find params[:workout_id]
+      redirect_to exercise_path @exercise if current_user != workout.user
     end
 end

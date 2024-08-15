@@ -5,7 +5,6 @@
 
 <div>
     <% @workout.exercises.each do |exercise| %>
-        <p><%= exercise.name %></p>
         <%= render "exercises/exercise", exercise: exercise %>
     <% end %>
 </div>
