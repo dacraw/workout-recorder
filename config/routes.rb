@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :exercises
 
-  resources :workouts, only: [:show] do
+  resources :workouts, only: [:create, :new, :show] do
     resources :exercises
   end
   get "my_workouts", to: "workouts#my_workouts"

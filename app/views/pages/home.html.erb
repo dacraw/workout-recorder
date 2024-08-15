@@ -9,8 +9,8 @@
     <% end %>
 </p>
 <p>
-    <%= link_to new_exercise_path, class: "btn-primary" do %>
-        <span>Add New Exercise</span>
+    <%= button_to workouts_path, method: :post, class: "btn-primary" do %>
+        <span>Create New Workout</span>
         <span>
             <i class="fa-solid fa-square-plus"></i>
             <i class="fa-solid fa-dumbbell"></i>
