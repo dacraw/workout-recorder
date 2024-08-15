@@ -4,8 +4,10 @@
   <%= render @exercise %>
 </div>
 
-<div class="inline-flex flex-col">
-  <%= render "exercises_edit_link", exercise: @exercise, show_text: true %>
-  <%= render "exercises_index_link" %>
-  <%= render "exercises_destroy_link", exercise: @exercise, show_text: true %>
-</div>
+<% if current_user.id == @exercise.user.id %>                                                        
+  <div class="inline-flex flex-col">
+    <%= render "exercises_edit_link", exercise: @exercise, show_text: true %>
+    <%= render "exercises_index_link" %>
+    <%= render "exercises_destroy_link", exercise: @exercise, show_text: true %>
+  </div>
+<% end %>

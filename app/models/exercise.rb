@@ -2,6 +2,7 @@ class Exercise < ApplicationRecord
     include GeminiAssistant
 
     belongs_to :workout, optional: false
+    has_one :user, through: :workout
     
     # TODO: Only call this is name/description field changes to minimize Google API calls
     before_save :set_gemini_response

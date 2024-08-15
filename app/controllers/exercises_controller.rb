@@ -1,6 +1,7 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_exercise, only: %i[ show edit update destroy ]
+  before_action :check_author, except: [:index, :show]
   # GET /exercises or /exercises.json
   def index
     @exercises = Exercise.all
@@ -68,5 +69,9 @@ class ExercisesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def exercise_params
       params.require(:exercise).permit(:name, :description)
+    end
+
+    def check_author
+      redirect_to exercise_path @exercise if current_user != @exercise.user
     end
 end
