@@ -1,12 +1,13 @@
 <h1 class="page-header">View Workout</h1>
 
-<%= link_to "Add Exercise", new_workout_exercise_path(@workout), class:"btn-primary" %>
+<%= link_to "Add Exercise", new_workout_exercise_path(@workout), class:"btn-primary", data: { turbo_frame: 'modal' } %>
 <p class="mb-4">Workout Date: <%= @workout.date %>
 
-<div>
+<div id="workout-<%= @workout.id %>">
     <% @exercises.each do |exercise| %>
         <div class="mb-4">
             <%= render "exercises/exercise", workout: @workout, exercise: exercise %>
+            <%= render "workouts/my_workouts_link" %>
         </div>
     <% end %>
 </div>
