@@ -15,7 +15,7 @@
                 </div>
             <% end %>
             
-            <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary" %></p>
+            <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
         </div>
 
     <% end %>

@@ -1,8 +1,10 @@
 <h1 class="page-header">New exercise</h1>
 
-<%= render "form", workout: @workout, exercise: @exercise %>
+<%= turbo_frame_tag "modal" do %>
+  <%= render "form", workout: @workout, exercise: @exercise %>
 
-<br>
+  <br>
+<% end %>
 
 <div>
   <%= render "workouts/workouts_index_link", workout: @workout %>
