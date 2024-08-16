@@ -3,10 +3,6 @@ class WorkoutsController < ApplicationController
     before_action :set_workout, only: %i[ show destroy ]
     before_action :check_author, only: :destroy
 
-    def new
-        @workout = Workout.new
-    end
-
     def create
         @workout = Workout.new
         @workout.user = current_user
