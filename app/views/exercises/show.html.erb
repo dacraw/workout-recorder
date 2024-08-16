@@ -1,7 +1,7 @@
 <h1 class="page-header">View Exercise</h1>
 
 <div class="mb-4">
-  <%= render @exercise %>
+  <%= render 'exercise', workout: @workout, exercise: @exercise %>
 </div>
 
 <% if current_user.id == @exercise.user.id %>                                                        

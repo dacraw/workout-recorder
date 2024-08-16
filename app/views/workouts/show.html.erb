@@ -6,7 +6,7 @@
 <div>
     <% @exercises.each do |exercise| %>
         <div class="mb-4">
-            <%= render "exercises/exercise", exercise: exercise %>
+            <%= render "exercises/exercise", workout: @workout, exercise: exercise %>
         </div>
     <% end %>
 </div>
