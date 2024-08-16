@@ -1,5 +1,5 @@
 <div id="<%= dom_id exercise %>">
-  <p><span class="font-bold">Date:</span> <span> <%= time_ago_in_words exercise.created_at %> ago</p>
+  <p class="italic">Completed <span> <%= time_ago_in_words exercise.created_at %> ago</p>
   <p>
     <span class="font-bold">Name:</span>
     <%= exercise.name %>
@@ -16,5 +16,17 @@
     <% else %>
       <%= sanitize exercise.get_and_set_gemini_response_html %>
     <% end %>
+  </div>
+
+  <div class="mb-4 mt-2">
+    <div>
+        <% unless current_page? workout_exercise_path workout, exercise %>
+          <%= render "exercises/exercises_show_link", workout: workout, exercise: exercise %>
+        <% end %>
+        <% if current_user == exercise.user %>
+          <%= render "exercises/exercises_edit_link", workout: workout, exercise: exercise %>
+          <%= render "exercises/exercises_destroy_link", workout: workout, exercise: exercise %>
+        <% end %>
+    </div>
   </div>
 </div>

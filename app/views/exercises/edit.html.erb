@@ -1,10 +1,8 @@
-<h1 class="page-header">Editing Exercise</h1>
-
-<%= render "form", exercise: @exercise %>
+<%= render "modal_form", title: "Edit Exercise" %>
 
 <br>
 
 <div class="inline-flex flex-col">
-  <%= render "exercises_destroy_link", exercise: @exercise, show_text: true %>
-  <%= render "exercises_index_link" %>
+  <%= render "exercises_destroy_link", workout: @workout, exercise: @exercise, show_text: true %>
+  <%= render "workouts/workouts_index_link", workout: @workout %>
 </div>

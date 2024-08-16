@@ -1,0 +1,45 @@
+class WorkoutsController < ApplicationController
+    before_action :authenticate_user!
+    before_action :set_workout, only: %i[ show destroy ]
+    before_action :check_author, only: :destroy
+
+    def create
+        @workout = Workout.new
+        @workout.user = current_user
+
+        if @workout.save
+            flash[:notice] = "Workout created!"
+            redirect_to workout_path @workout
+        else
+            flash[:alert] = "Workout failed to create!"
+            redirect_to my_workouts
+        end
+    end
+
+    def show
+        @exercises = @workout.exercises.order(created_at: :desc)
+    end
+
+    def destroy
+        @workout.destroy!
+    
+        respond_to do |format|
+          format.html { redirect_to my_workouts_path, notice: "Workout was successfully destroyed." }
+          format.json { head :no_content }
+        end
+    end
+
+    def my_workouts
+        @workouts = current_user.workouts
+    end
+
+    private
+    def set_workout
+        @workout ||= Workout.find params[:id]
+    end
+
+    def check_author
+        @workout ||= Workout.find params[:id]
+        redirect_to my_workouts if current_user != @workout.user
+    end
+end

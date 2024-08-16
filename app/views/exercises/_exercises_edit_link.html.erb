@@ -1,4 +1,4 @@
-<%= link_to edit_exercise_path(exercise), class: "mr-4 md:mr-2", title: "Edit Exercise" do %>
+<%= link_to edit_workout_exercise_path(workout, exercise), class: "mr-4 md:mr-2 link", title: "Edit Exercise", data: { turbo_frame: 'modal'} do %>
     <i class="fa-solid fa-pencil"></i>
 
     <% if local_assigns[:show_text] %>

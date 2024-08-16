@@ -7,5 +7,10 @@ export default class extends Controller {
     this.toggleableTarget.classList.toggle("hidden");
   }
 
+  toggleAccordion(e) {
+    const target = e.target.closest("span").nextElementSibling;
+    target.classList.toggle("hidden");
+  }
+
   connect() {}
 }

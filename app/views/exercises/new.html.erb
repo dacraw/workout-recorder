@@ -1,9 +1,7 @@
-<h1 class="page-header">New exercise</h1>
+<%= render "modal_form", title: "New Exercise" %>
 
-<%= render "form", exercise: @exercise %>
-
-<br>
+<br />
 
 <div>
-  <%= render "exercises_index_link" %>
+  <%= render "workouts/workouts_index_link", workout: @workout %>
 </div>

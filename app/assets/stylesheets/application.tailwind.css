@@ -4,7 +4,13 @@
 
 @layer components {
   .btn-primary {
-    @apply border-2 px-6 py-2 my-4 cursor-pointer inline-flex items-center gap-6;
+    @apply border-2 px-6 py-2 my-4 cursor-pointer inline-flex items-center gap-6 justify-between;
+  }
+  .btn-cancel {
+    @apply border-2 px-6 py-2 my-4 cursor-pointer inline-flex items-center gap-6 text-gray-100 font-bold bg-gray-400;
+  }
+  .link {
+    @apply text-gray-400 font-bold mr-4 md:mr-2 inline-flex gap-4 items-center;
   }
   .page-header {
     @apply text-4xl mb-6;

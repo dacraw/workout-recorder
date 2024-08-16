@@ -1,0 +1,22 @@
+<h1 class="page-header">My Workouts</h1>
+
+<div data-controller="dropdown">
+    <% @workouts.each do |workout| %>
+        <span class="flex items-center mb-4 gap-6">
+            <%= button_tag workout.date, class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
+
+            <%= button_to workout, method: :delete, type: :button, data: { confirm: 'Are you sure?', turbo_confirm: "Are you sure?"} do %>
+                <i class="fa-regular fa-trash-can cursor-pointer"></i>
+            <% end %>
+        </span>
+        
+        <div class="hidden ml-4" id="workout-<%= workout.id %>">
+            <% workout.exercises.each do |exercise| %>
+                <%= render "exercises/exercise", workout: workout, exercise: exercise %>
+            <% end %>
+            
+            <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
+        </div>
+
+    <% end %>
+</div>

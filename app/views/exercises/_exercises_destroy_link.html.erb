@@ -1,4 +1,4 @@
-<%= button_to exercise, method: :delete, title: "Delete Exercise", data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, form_class: "inline-block mr-4 md:mr-2", type: :button do %>
+<%= button_to [workout, exercise], method: :delete, title: "Delete Exercise", data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, form_class: "inline-block mr-4 md:mr-2", type: :button, class: "link" do %>
     <i class="fa-regular fa-trash-can"></i>
     <% if local_assigns[:show_text] %>
         <span>Delete Exercise</span>

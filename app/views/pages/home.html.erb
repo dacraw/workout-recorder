@@ -1,7 +1,7 @@
 <h1 class="page-header">Let's Analyze Your Workouts!</h1>
 <p>
-    <%= link_to exercises_path, class: "btn-primary" do %>
-        <span>View Exercise Log</span>
+    <%= link_to my_workouts_path, class: "btn-primary" do %>
+        <span>View Workout Log</span>
         <span>
             <i class="fa-solid fa-eye"></i>
             <i class="fa-regular fa-file"></i>
@@ -9,8 +9,8 @@
     <% end %>
 </p>
 <p>
-    <%= link_to new_exercise_path, class: "btn-primary" do %>
-        <span>Add New Exercise</span>
+    <%= button_to workouts_path, method: :post, class: "btn-primary" do %>
+        <span>Create New Workout</span>
         <span>
             <i class="fa-solid fa-square-plus"></i>
             <i class="fa-solid fa-dumbbell"></i>

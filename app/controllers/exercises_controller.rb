@@ -1,31 +1,27 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_exercise, only: %i[ show edit update destroy ]
-  # GET /exercises or /exercises.json
-  def index
-    @exercises = Exercise.all
-  end
+  before_action :set_workout
+  before_action :check_author, except: [:index, :show]
 
-  # GET /exercises/1 or /exercises/1.json
   def show
   end
 
-  # GET /exercises/new
   def new
     @exercise = Exercise.new
   end
 
-  # GET /exercises/1/edit
   def edit
   end
 
-  # POST /exercises or /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
-
+    @exercise.workout_id = params[:workout_id]
+    
     respond_to do |format|
       if @exercise.save
-        format.html { redirect_to exercise_url(@exercise), notice: "Exercise was successfully created." }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend("workout-#{@workout.id}", partial: 'exercises/exercise', locals: {workout: @workout, exercise: @exercise}) }
+        format.html { redirect_to workout_url(@exercise.workout_id), notice: "Exercise was successfully created." }
         format.json { render :show, status: :created, location: @exercise }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,11 +30,11 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exercises/1 or /exercises/1.json
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        format.html { redirect_to exercise_url(@exercise), notice: "Exercise was successfully updated." }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@exercise, partial: "exercises/exercise", locals: { exercise: @exercise, workout: @workout}) }
+        format.html { redirect_to workout_exercise_url(@workout, @exercise), notice: "Exercise was successfully updated." }
         format.json { render :show, status: :ok, location: @exercise }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,12 +43,11 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # DELETE /exercises/1 or /exercises/1.json
   def destroy
     @exercise.destroy!
 
     respond_to do |format|
-      format.html { redirect_to exercises_url, notice: "Exercise was successfully destroyed." }
+      format.html { redirect_to workout_path(@workout), notice: "Exercise was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,8 +58,17 @@ class ExercisesController < ApplicationController
       @exercise = Exercise.find(params[:id])
     end
 
+    def set_workout
+      @workout = Workout.find params[:workout_id]
+    end
+
     # Only allow a list of trusted parameters through.
     def exercise_params
       params.require(:exercise).permit(:name, :description)
+    end
+
+    def check_author
+      @workout ||= Workout.find params[:workout_id]
+      redirect_to my_workouts_path params[:id] if current_user != @workout.user
     end
 end
