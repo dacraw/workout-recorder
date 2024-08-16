@@ -4,26 +4,16 @@ class ExercisesController < ApplicationController
   before_action :set_workout
   before_action :check_author, except: [:index, :show]
 
-  # GET /exercises or /exercises.json
-  def index
-    @exercises = Exercise.all
-  end
-
-  # GET /exercises/1 or /exercises/1.json
   def show
   end
 
-  # GET /exercises/new
   def new
-    @workout = Workout.find params[:workout_id]
     @exercise = Exercise.new
   end
 
-  # GET /exercises/1/edit
   def edit
   end
 
-  # POST /exercises or /exercises.json
   def create
     @exercise = Exercise.new(exercise_params)
     @exercise.workout_id = params[:workout_id]
@@ -40,7 +30,6 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exercises/1 or /exercises/1.json
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
@@ -54,7 +43,6 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # DELETE /exercises/1 or /exercises/1.json
   def destroy
     @exercise.destroy!
 
@@ -71,7 +59,7 @@ class ExercisesController < ApplicationController
     end
 
     def set_workout
-      @workout = Workout.find params[:workout_id] if params[:workout_id]
+      @workout = Workout.find params[:workout_id]
     end
 
     # Only allow a list of trusted parameters through.
@@ -80,7 +68,7 @@ class ExercisesController < ApplicationController
     end
 
     def check_author
-      workout = Workout.find params[:workout_id]
-      redirect_to my_workouts_path params[:id] if current_user != workout.user
+      @workout ||= Workout.find params[:workout_id]
+      redirect_to my_workouts_path params[:id] if current_user != @workout.user
     end
 end

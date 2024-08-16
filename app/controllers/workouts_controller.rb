@@ -1,7 +1,7 @@
 class WorkoutsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_workout, only: %i[ create show destroy ]
-    before_action :check_author, except: [:index, :show, :my_workouts, :destroy]
+    before_action :set_workout, only: %i[ show destroy ]
+    before_action :check_author, only: :destroy
 
     def new
         @workout = Workout.new
@@ -38,12 +38,12 @@ class WorkoutsController < ApplicationController
     end
 
     private
-    def check_author
-        workout = Workout.find params[:workout_id]
-        redirect_to exercise_path params[:id] if current_user != workout.user
+    def set_workout
+        @workout ||= Workout.find params[:id]
     end
 
-    def set_workout
-        @workout = Workout.find params[:id]
+    def check_author
+        @workout ||= Workout.find params[:id]
+        redirect_to my_workouts if current_user != @workout.user
     end
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :workouts, only: [:create, :new, :show, :destroy] do
-    resources :exercises
+    resources :exercises, except: [:index]
   end
   get "my_workouts", to: "workouts#my_workouts"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
