@@ -1,13 +1,6 @@
-<h1 class="page-header">New exercise</h1>
+<%= render "modal_form", title: "New Exercise" %>
 
-<%= turbo_frame_tag "modal" do %>
-  <div data-controller="turbo-modal" class="p-4">
-    <%= render "form", workout: @workout, exercise: @exercise %>
-    <p><%= button_tag "Close", data: { action: "click->turbo-modal#hideModal" }, class: "btn-cancel" %></p>
-  </div>
-
-  <br>
-<% end %>
+<br />
 
 <div>
   <%= render "workouts/workouts_index_link", workout: @workout %>

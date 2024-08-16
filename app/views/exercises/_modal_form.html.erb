@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "modal" do %>
+  <div data-controller="turbo-modal" class="p-4">
+    <h1 class="page-header"><%= title %></h1>
+    <%= render "form", workout: @workout, exercise: @exercise %>
+    <p><%= button_tag "Close", data: { action: "click->turbo-modal#hideModal" }, class: "btn-cancel" %></p>
+  </div>
+<% end %>
