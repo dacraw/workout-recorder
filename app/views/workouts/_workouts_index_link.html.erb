@@ -1,3 +1,9 @@
-<%= link_to workout_path workout do %>
-    Back to Workout
+<%= link_to workout_path(workout), class: 'link' do %>
+    <div>
+        <i class="fa-regular fa-eye"></i>
+        <i class="fa-solid fa-dumbbell"></i>
+    </div>
+    <span>
+        View Workout
+    </span>
 <% end %>

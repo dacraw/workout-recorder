@@ -4,10 +4,6 @@
   <%= render 'exercise', workout: @workout, exercise: @exercise %>
 </div>
 
-<% if current_user.id == @exercise.user.id %>                                                        
-  <div class="inline-flex flex-col">
-    <%= render "exercises_edit_link", exercise: @exercise, workout: @workout, show_text: true %>
-    <%= render "workouts/workouts_index_link", workout: @workout %>
-    <%= render "exercises_destroy_link", workout: @workout, exercise: @exercise, show_text: true %>
-  </div>
-<% end %>
+<div class="inline-flex flex-col">
+  <%= render "workouts/workouts_index_link", workout: @workout %>
+</div>

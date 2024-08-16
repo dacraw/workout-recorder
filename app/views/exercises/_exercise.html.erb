@@ -20,11 +20,11 @@
 
   <div class="mb-4 mt-2">
     <div>
-        <%= render "exercises/exercises_show_link", workout: workout, exercise: exercise %>
-        <% if current_user.id == exercise.user.id %>   
-          <%= render "exercises/exercises_edit_link", workout: workout, exercise: exercise %>
-          <%= render "exercises/exercises_destroy_link", workout: workout, exercise: exercise %>
+        <% unless current_page? workout_exercise_path workout, exercise %>
+          <%= render "exercises/exercises_show_link", workout: workout, exercise: exercise %>
         <% end %>
+        <%= render "exercises/exercises_edit_link", workout: workout, exercise: exercise %>
+        <%= render "exercises/exercises_destroy_link", workout: workout, exercise: exercise %>
     </div>
   </div>
 </div>
