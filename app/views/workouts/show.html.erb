@@ -1,6 +1,8 @@
 <h1 class="page-header">View Workout</h1>
 
-<%= link_to "Add Exercise", new_workout_exercise_path(@workout), class:"btn-primary", data: { turbo_frame: 'modal' } %>
+<% if current_user == @workout.user %>
+    <%= link_to "Add Exercise", new_workout_exercise_path(@workout), class:"btn-primary", data: { turbo_frame: 'modal' } %>
+<% end %>
 <p class="mb-4">Workout Date: <%= @workout.date %>
 
 <div id="workout-<%= @workout.id %>">

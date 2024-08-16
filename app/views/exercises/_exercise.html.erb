@@ -23,8 +23,10 @@
         <% unless current_page? workout_exercise_path workout, exercise %>
           <%= render "exercises/exercises_show_link", workout: workout, exercise: exercise %>
         <% end %>
-        <%= render "exercises/exercises_edit_link", workout: workout, exercise: exercise %>
-        <%= render "exercises/exercises_destroy_link", workout: workout, exercise: exercise %>
+        <% if current_user == exercise.user %>
+          <%= render "exercises/exercises_edit_link", workout: workout, exercise: exercise %>
+          <%= render "exercises/exercises_destroy_link", workout: workout, exercise: exercise %>
+        <% end %>
     </div>
   </div>
 </div>
