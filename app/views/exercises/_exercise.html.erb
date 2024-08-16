@@ -17,4 +17,12 @@
       <%= sanitize exercise.get_and_set_gemini_response_html %>
     <% end %>
   </div>
+
+  <div class="mb-4 mt-2">
+    <div>
+        <%= render "exercises/exercises_show_link", workout: workout, exercise: exercise %>
+        <%= render "exercises/exercises_edit_link", workout: workout, exercise: exercise %>
+        <%= render "exercises/exercises_destroy_link", workout: workout, exercise: exercise %>
+    </div>
+  </div>
 </div>
