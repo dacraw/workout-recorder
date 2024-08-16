@@ -1,5 +1,7 @@
 class WorkoutsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_workout, only: %i[ create show ]
+    before_action :check_author, except: [:index, :show, :my_workouts]
 
     def new
         @workout = Workout.new
@@ -19,11 +21,20 @@ class WorkoutsController < ApplicationController
     end
 
     def show
-        @workout = Workout.find params[:id]
         @exercises = @workout.exercises.order(created_at: :desc)
     end
 
     def my_workouts
         @workouts = current_user.workouts
+    end
+
+    private
+    def check_author
+        workout = Workout.find params[:workout_id]
+        redirect_to exercise_path params[:id] if current_user != workout.user
+    end
+
+    def set_workout
+        @workout = Workout.find params[:id]
     end
 end
