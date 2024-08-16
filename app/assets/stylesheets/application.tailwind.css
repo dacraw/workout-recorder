@@ -6,6 +6,9 @@
   .btn-primary {
     @apply border-2 px-6 py-2 my-4 cursor-pointer inline-flex items-center gap-6;
   }
+  .btn-cancel {
+    @apply border-2 px-6 py-2 my-4 cursor-pointer inline-flex items-center gap-6 text-gray-100 font-bold bg-gray-400;
+  }
   .page-header {
     @apply text-4xl mb-6;
   }
