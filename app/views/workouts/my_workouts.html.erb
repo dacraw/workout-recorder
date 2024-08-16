@@ -2,7 +2,11 @@
 
 <div data-controller="dropdown">
     <% @workouts.each do |workout| %>
-        <%= button_tag workout.date, class: "block text-xl mb-4 text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
+        <span class="flex items-center mb-4 gap-6">
+            <%= button_tag workout.date, class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
+            <i class="fa-regular fa-trash-can"></i>
+        </span>
+        
         <div class="hidden ml-4" id="workout-<%= workout.id %>">
             <% workout.exercises.each do |exercise| %>
                 <%= render "exercises/exercise", workout: workout, exercise: exercise %>
