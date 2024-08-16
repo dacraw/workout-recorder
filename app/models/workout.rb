@@ -1,6 +1,6 @@
 class Workout < ApplicationRecord
     belongs_to :user
-    has_many :exercises
+    has_many :exercises, dependent: :destroy
 
     validates :user, presence: true
 

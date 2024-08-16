@@ -1,7 +1,7 @@
 class WorkoutsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_workout, only: %i[ create show ]
-    before_action :check_author, except: [:index, :show, :my_workouts]
+    before_action :set_workout, only: %i[ create show destroy ]
+    before_action :check_author, except: [:index, :show, :my_workouts, :destroy]
 
     def new
         @workout = Workout.new
@@ -22,6 +22,15 @@ class WorkoutsController < ApplicationController
 
     def show
         @exercises = @workout.exercises.order(created_at: :desc)
+    end
+
+    def destroy
+        @workout.destroy!
+    
+        respond_to do |format|
+          format.html { redirect_to my_workouts_path, notice: "Workout was successfully destroyed." }
+          format.json { head :no_content }
+        end
     end
 
     def my_workouts

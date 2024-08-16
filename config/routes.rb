@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :workouts, only: [:create, :new, :show] do
+  resources :workouts, only: [:create, :new, :show, :destroy] do
     resources :exercises
   end
   get "my_workouts", to: "workouts#my_workouts"
