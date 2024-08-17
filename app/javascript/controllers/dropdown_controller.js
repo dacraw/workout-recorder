@@ -8,6 +8,7 @@ export default class extends Controller {
   }
 
   toggleAccordion(e) {
+    this.hideExercises();
     // Remove `active-workout` class from elements that were part of the previously selected workout
     const previouslyActive = document.querySelectorAll(".active-workout");
     previouslyActive.forEach((target) =>
@@ -23,13 +24,10 @@ export default class extends Controller {
     workoutExercisesElement.classList.toggle("hidden");
   }
 
-  toggleActiveWorkout(target) {
-    const previouslyActive = document.querySelectorAll(".active-workout");
-    previouslyActive.forEach((target) =>
-      target.classList.remove("active-workout")
-    );
-
-    target.classList.add("active-workout");
+  hideExercises(e) {
+    document
+      .querySelectorAll(".exercises")
+      .forEach((target) => target.classList.add("hidden"));
   }
 
   connect() {}

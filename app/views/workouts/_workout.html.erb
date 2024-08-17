@@ -1,0 +1,14 @@
+<% if current_user == workout.user %>
+    <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
+<% end %>
+
+<% if workout.exercises.blank? %>
+    <p>
+        <i class="fa-solid fa-arrow-up"></i>
+        Click the "Add Exercise" button to add exercises to this workout
+    </p>
+<% else %>
+    <% workout.exercises.each do |exercise| %>
+        <%= render "exercises/exercise", workout: workout, exercise: exercise %>
+    <% end %>
+<% end %>
