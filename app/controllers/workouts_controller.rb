@@ -9,7 +9,7 @@ class WorkoutsController < ApplicationController
 
         if @workout.save
             flash[:notice] = "Workout created!"
-            redirect_to workout_path @workout
+            redirect_to url_for(controller: 'workouts', action: 'my_workouts', params: {workout_id: @workout.id})
         else
             flash[:alert] = "Workout failed to create!"
             redirect_to my_workouts
