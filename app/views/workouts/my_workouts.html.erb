@@ -11,11 +11,18 @@
         </span>
         
         <div class="<%= params[:workout_id].to_i == workout.id ? "" : "hidden" %> ml-4" id="workout-<%= workout.id %>">
-            <% workout.exercises.each do |exercise| %>
-                <%= render "exercises/exercise", workout: workout, exercise: exercise %>
+            <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>        
+
+            <% if workout.exercises.blank? %>
+                <p>
+                    <i class="fa-solid fa-arrow-up"></i>
+                    Click the "Add Exercise" button to add exercises to this workout
+                </p>
+            <% else %>
+                <% workout.exercises.each do |exercise| %>
+                    <%= render "exercises/exercise", workout: workout, exercise: exercise %>
+                <% end %>
             <% end %>
-            
-            <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
         </div>
 
     <% end %>
