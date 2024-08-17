@@ -20,7 +20,7 @@
 
   <div class="mb-4 mt-2">
     <div>
-        <% unless current_page? workout_exercise_path workout, exercise %>
+        <% unless true %>
           <%= render "exercises/exercises_show_link", workout: workout, exercise: exercise %>
         <% end %>
         <% if current_user == exercise.user %>

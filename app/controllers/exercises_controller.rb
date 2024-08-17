@@ -4,9 +4,6 @@ class ExercisesController < ApplicationController
   before_action :set_workout
   before_action :check_author, except: [:index, :show]
 
-  def show
-  end
-
   def new
     @exercise = Exercise.new
   end
@@ -47,7 +44,8 @@ class ExercisesController < ApplicationController
     @exercise.destroy!
 
     respond_to do |format|
-      format.html { redirect_to workout_path(@workout), notice: "Exercise was successfully destroyed." }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@exercise)}
+      format.html { redirect_to url_for(controller: 'workouts', action: 'my_workouts', params: {workout_id: @workout.id}), notice: "Exercise was successfully destroyed." }
       format.json { head :no_content }
     end
   end
