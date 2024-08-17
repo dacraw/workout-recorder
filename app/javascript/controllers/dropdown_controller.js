@@ -1,27 +1,34 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["toggleable"];
+  static targets = ["toggleable", "activatable", "rotatable"];
 
   toggle() {
     this.toggleableTarget.classList.toggle("hidden");
   }
 
-  toggleAccordion(e) {
+  toggleAccordion() {
+    this.rotateCaret();
     this.hideExercises();
-    // Remove `active-workout` class from elements that were part of the previously selected workout
-    const previouslyActive = document.querySelectorAll(".active-workout");
-    previouslyActive.forEach((target) =>
-      target.classList.remove("active-workout")
-    );
+    this.toggleableTarget.classList.toggle("hidden");
+    this.toggleActive();
+  }
 
-    // Target the element containing the workout name as the base for toggling exercise list and `active-workout` class
-    const workoutNameElement = e.target.closest("span");
-    const workoutExercisesElement = workoutNameElement.nextElementSibling;
+  toggleActive() {
+    document
+      .querySelectorAll(".active-workout")
+      .forEach((target) => target.classList.remove("active-workout"));
 
-    workoutNameElement.classList.add("active-workout");
-    workoutExercisesElement.classList.add("active-workout");
-    workoutExercisesElement.classList.toggle("hidden");
+    this.activatableTargets.forEach((target) => {
+      target.classList.toggle("active-workout");
+    });
+  }
+
+  rotateCaret() {
+    document
+      .querySelectorAll(".rotate-90")
+      .forEach((target) => target.classList.remove("rotate-90"));
+    this.rotatableTarget.classList.toggle("rotate-90");
   }
 
   hideExercises(e) {
@@ -29,6 +36,4 @@ export default class extends Controller {
       .querySelectorAll(".exercises")
       .forEach((target) => target.classList.add("hidden"));
   }
-
-  connect() {}
 }

@@ -7,18 +7,21 @@
     <% end %>
 </div>
 
-<div data-controller="dropdown">
+<div >
     <% @workouts.order(date: :desc).each do |workout| %>
-        <div>
-            <span class="flex items-center gap-6 w-fit p-2 <%= "active-workout rounded-b-none" if params[:workout_id].to_i == workout.id %>">
-                <%= button_tag workout.date.strftime("%Y-%m-%d"), class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
+        <div data-controller="dropdown">
+            <span class="flex items-center gap-6 w-fit p-2 <%= "active-workout rounded-b-none" if params[:workout_id].to_i == workout.id %>" data-dropdown-target="activatable">
+                <%= button_tag class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } do %>
+                    <i class="fa-solid fa-caret-right" data-dropdown-target="rotatable"></i>
+                    <span><%= workout.date.strftime("%Y-%m-%d") %></span>
+                <% end %>
 
                 <%= button_to workout, method: :delete, type: :button, data: { confirm: 'Are you sure?', turbo_confirm: "Are you sure?"} do %>
                     <i class="fa-regular fa-trash-can cursor-pointer"></i>
                 <% end %>
             </span>
             
-            <div class="<%= params[:workout_id].to_i == workout.id ? "active-workout rounded-t-none" : "hidden" %> p-2 exercises" id="workout-<%= workout.id %>">
+            <div class="<%= params[:workout_id].to_i == workout.id ? "active-workout rounded-t-none" : "hidden" %> p-2 exercises" id="workout-<%= workout.id %>" data-dropdown-target="toggleable activatable">
                 <%= render "workout", workout: workout %>
             </div>
         </div>
