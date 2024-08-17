@@ -8,7 +8,7 @@
         Click the "Add Exercise" button to add exercises to this workout
     </p>
 <% else %>
-    <% workout.exercises.each do |exercise| %>
+    <% workout.exercises.order(date: :desc).each do |exercise| %>
         <%= render "exercises/exercise", workout: workout, exercise: exercise %>
     <% end %>
 <% end %>
