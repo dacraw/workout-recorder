@@ -12,6 +12,9 @@
   .link {
     @apply text-gray-400 font-bold mr-4 md:mr-2 inline-flex gap-4 items-center;
   }
+  .active-workout {
+    @apply bg-gray-700 rounded-sm;
+  }
   .page-header {
     @apply text-4xl mb-6;
   }

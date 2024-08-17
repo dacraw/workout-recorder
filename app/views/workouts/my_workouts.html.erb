@@ -2,7 +2,7 @@
 
 <div data-controller="dropdown">
     <% @workouts.each do |workout| %>
-        <span class="flex items-center mb-4 gap-6">
+        <span class="flex items-center gap-6 w-fit p-2 <%= "active-workout rounded-b-none" if params[:workout_id].to_i == workout.id %>">
             <%= button_tag workout.date, class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
 
             <%= button_to workout, method: :delete, type: :button, data: { confirm: 'Are you sure?', turbo_confirm: "Are you sure?"} do %>
@@ -10,7 +10,7 @@
             <% end %>
         </span>
         
-        <div class="<%= params[:workout_id].to_i == workout.id ? "" : "hidden" %> ml-4" id="workout-<%= workout.id %>">
+        <div class="<%= params[:workout_id].to_i == workout.id ? "active-workout rounded-t-none" : "hidden" %> p-2" id="workout-<%= workout.id %>">
             <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>        
 
             <% if workout.exercises.blank? %>
