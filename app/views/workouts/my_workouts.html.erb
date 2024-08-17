@@ -10,7 +10,7 @@
             <% end %>
         </span>
         
-        <div class="hidden ml-4" id="workout-<%= workout.id %>">
+        <div class="<%= params[:workout_id].to_i == workout.id ? "" : "hidden" %> ml-4" id="workout-<%= workout.id %>">
             <% workout.exercises.each do |exercise| %>
                 <%= render "exercises/exercise", workout: workout, exercise: exercise %>
             <% end %>
