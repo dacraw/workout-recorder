@@ -11,7 +11,7 @@
     <% @workouts.order(date: :desc).each do |workout| %>
         <div>
             <span class="flex items-center gap-6 w-fit p-2 <%= "active-workout rounded-b-none" if params[:workout_id].to_i == workout.id %>">
-                <%= button_tag workout.date, class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
+                <%= button_tag workout.date.strftime("%Y-%m-%d"), class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } %>
 
                 <%= button_to workout, method: :delete, type: :button, data: { confirm: 'Are you sure?', turbo_confirm: "Are you sure?"} do %>
                     <i class="fa-regular fa-trash-can cursor-pointer"></i>
