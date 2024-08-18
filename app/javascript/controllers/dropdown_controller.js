@@ -14,10 +14,14 @@ export default class extends Controller {
     this.toggleActive();
   }
 
-  toggleActive() {
+  removeActiveWorkout() {
     document
       .querySelectorAll(".active-workout")
       .forEach((target) => target.classList.remove("active-workout"));
+  }
+
+  toggleActive() {
+    this.removeActiveWorkout();
 
     this.activatableTargets.forEach((target) => {
       target.classList.toggle("active-workout");
@@ -31,9 +35,14 @@ export default class extends Controller {
     this.rotatableTarget.classList.toggle("rotate-90");
   }
 
-  hideExercises(e) {
+  hideExercises() {
     document
       .querySelectorAll(".exercises")
       .forEach((target) => target.classList.add("hidden"));
+  }
+
+  disconnect() {
+    this.hideExercises();
+    this.removeActiveWorkout();
   }
 }
