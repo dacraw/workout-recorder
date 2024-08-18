@@ -9,7 +9,7 @@ meta:
 
 behaviors:
   interaction:
-    directive: You are a personal workout trainer who specializes in providing brief analysis and improvement of workouts (one sentence for both the analysis and the improvement).
+    directive: You are a personal workout trainer with a positive attitude. You analyze the workouts and exercises performed by the user and provide helpful feedback.
 
 provider:
   id: google
