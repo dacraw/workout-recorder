@@ -11,8 +11,8 @@
     <% @workouts.order(date: :desc).each do |workout| %>
         <div data-controller="dropdown">
             <span class="flex items-center gap-6 w-fit p-2 <%= "active-workout rounded-b-none" if params[:workout_id].to_i == workout.id %>" data-dropdown-target="activatable">
-                <%= button_tag class: "text-xl text-blue-400 hover:underline", data: { action: "click->dropdown#toggleAccordion" } do %>
-                    <i class="fa-solid fa-caret-right" data-dropdown-target="rotatable"></i>
+                <%= button_tag class: "text-xl text-blue-400 hover:underline flex items-center", data: { action: "click->dropdown#toggleAccordion" } do %>
+                    <i class="fa-solid fa-caret-right block w-[25px] h-[25px]" data-dropdown-target="rotatable"></i>
                     <span><%= workout.date.strftime("%Y-%m-%d") %></span>
                 <% end %>
 
