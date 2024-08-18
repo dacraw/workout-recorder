@@ -49,6 +49,8 @@ module GeminiAssistant
 
         bot.eval(
             <<-HEREDOC
+                Provide a one sentence analysis and one sentence improvement for the following exercise:
+                
                 exercise name: #{name}
                 exercise description: #{description}
             HEREDOC
