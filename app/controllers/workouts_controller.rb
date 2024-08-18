@@ -1,6 +1,8 @@
+include GeminiAssistant
+
 class WorkoutsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_workout, only: %i[ show destroy ]
+    before_action :set_workout, only: %i[ show destroy evaluate_workout ]
     before_action :check_author, only: :destroy
 
     def create
@@ -31,6 +33,13 @@ class WorkoutsController < ApplicationController
 
     def my_workouts
         @workouts = current_user.workouts
+    end
+
+    def evaluate_workout
+        # @evaluation = GeminiAssistant.evaluate_workout @workout.id
+
+        # @workout.update(gemini_response: @evaluation)
+        @workout.gemini_response = "Hey it works"
     end
 
     private

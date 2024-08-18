@@ -29,8 +29,10 @@ module GeminiAssistant
         exercise_text = exercises.map {|exercise| "exercise name: #{exercise.name}, exercise description: #{exercise.description}"}.join(";")
 
         heredoc_text = <<-HEREDOC
-        Provide an analysis of the following workout, which contains these exercises:
+        Provide a brief analysis of the following workout, which contains these exercises:
             #{exercise_text}
+
+        Do not provide any recommendations in your analysis.
         HEREDOC
 
         return "Cannot analyze this workout as it does not exist" if workout.blank?
