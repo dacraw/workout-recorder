@@ -18,16 +18,4 @@
   .page-header {
     @apply text-4xl mb-6;
   }
-
-  .absolute-center {
-    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-  }
-
-  turbo-frame[busy] {
-    @apply blur-sm;
-  }
-
-  turbo-frame[busy] ~ .loading-spinner {
-    @apply block;
-  }
 }

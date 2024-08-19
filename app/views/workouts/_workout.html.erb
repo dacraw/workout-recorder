@@ -1,7 +1,7 @@
 <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
 
 <div class="relative">
-    <%= turbo_frame_tag dom_id(workout) + "_evaluation" do %>
+    <%= turbo_frame_tag dom_id(workout) + "_evaluation", class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
         <div>
             <% if workout.gemini_response.present? %>
                 <%= sanitize workout.gemini_response_html %>

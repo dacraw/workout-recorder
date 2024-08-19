@@ -1,7 +1,9 @@
-<%= turbo_frame_tag "modal" do %>
-  <div data-controller="turbo-modal" class="p-4" data-action="turbo:submit-end->turbo-modal#submitEnd click@window->turbo-modal#closeBackground" data-turbo-modal-target="modal">
-    <h1 class="page-header"><%= title %></h1>
-    <%= render "form", workout: @workout, exercise: @exercise %>
-    <p><%= button_tag "Close", data: { action: "click->turbo-modal#hideModal" }, class: "btn-cancel" %></p>
-  </div>
-<% end %>
+<div class="relative">
+  <%= turbo_frame_tag "modal", class: "" do %>
+    <div data-controller="turbo-modal" class="p-4" data-action="turbo:submit-end->turbo-modal#submitEnd click@window->turbo-modal#closeBackground [&[busy]:text-red-600]" data-turbo-modal-target="modal">
+      <h1 class="page-header"><%= title %></h1>
+      <%= render "form", workout: @workout, exercise: @exercise %>
+      <p><%= button_tag "Close", data: { action: "click->turbo-modal#hideModal" }, class: "btn-cancel" %></p>
+    </div>
+  <% end %>
+</div>
