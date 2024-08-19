@@ -21,9 +21,7 @@
                 <% end %>
             </span>
             
-            <div class="<%= params[:workout_id].to_i == workout.id ? "active-workout rounded-t-none" : "hidden" %> p-2 exercises" id="workout-<%= workout.id %>" data-dropdown-target="toggleable activatable">
-                <%= render "workout", workout: workout %>
-            </div>
+            <%= render "workout", workout: workout %>
         </div>
     <% end %>
 </div>

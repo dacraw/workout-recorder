@@ -1,30 +1,34 @@
-<%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
+<div class="<%= params[:workout_id].to_i == workout.id ? "active-workout rounded-t-none" : "hidden" %> p-2 exercises" id="workout-<%= workout.id %>" data-dropdown-target="toggleable activatable">
+    <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
 
-<div class="relative">
-    <%= turbo_frame_tag dom_id(workout) + "_evaluation", class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
-        <div>
-            <% if workout.gemini_response.present? %>
-                <%= sanitize workout.gemini_response_html %>
-            <% else %>
-                <p>Add exercises to this workout in order to analyze it!</p>    
+    <div class="relative">
+        <%= turbo_frame_tag dom_id(workout) + "_evaluation", class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
+            <div>
+                <% if workout.gemini_response.present? %>
+                    <%= sanitize workout.gemini_response_html %>
+                <% else %>
+                    <p>Add exercises to this workout in order to analyze it!</p>    
+                <% end %>
+            </div>
+        <% end %>
+        
+        <%= render "application/loading_spinner" %>
+    </div>
+
+    <% if current_user == workout.user %>
+        <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
+    <% end %>
+
+    <div id="<%= dom_id(workout, "exercises") %>">
+        <% if workout.exercises.blank? %>
+            <p>
+                <i class="fa-solid fa-arrow-up"></i>
+                Click the "Add Exercise" button to add exercises to this workout
+            </p>
+        <% else %>
+            <% workout.exercises.order(date: :desc).each do |exercise| %>
+                <%= render "exercises/exercise", workout: workout, exercise: exercise %>
             <% end %>
-        </div>
-    <% end %>
-    
-    <%= render "application/loading_spinner" %>
+        <% end %>
+    </div>
 </div>
-
-<% if current_user == workout.user %>
-    <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
-<% end %>
-
-<% if workout.exercises.blank? %>
-    <p>
-        <i class="fa-solid fa-arrow-up"></i>
-        Click the "Add Exercise" button to add exercises to this workout
-    </p>
-<% else %>
-    <% workout.exercises.order(date: :desc).each do |exercise| %>
-        <%= render "exercises/exercise", workout: workout, exercise: exercise %>
-    <% end %>
-<% end %>

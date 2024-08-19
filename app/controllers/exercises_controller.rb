@@ -17,7 +17,7 @@ class ExercisesController < ApplicationController
     
     respond_to do |format|
       if @exercise.save
-        format.turbo_stream { render turbo_stream: turbo_stream.prepend("workout-#{@workout.id}", partial: 'exercises/exercise', locals: {workout: @workout, exercise: @exercise}) }
+        format.turbo_stream { render turbo_stream: turbo_stream.prepend("exercises_workout_#{@workout.id}", partial: 'exercises/exercise', locals: {workout: @workout, exercise: @exercise}) }
         format.html { redirect_to workout_url(@exercise.workout_id), notice: "Exercise was successfully created." }
         format.json { render :show, status: :created, location: @exercise }
       else
