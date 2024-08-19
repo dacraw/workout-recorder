@@ -36,10 +36,9 @@ class WorkoutsController < ApplicationController
     end
 
     def evaluate_workout
-        # @evaluation = GeminiAssistant.evaluate_workout @workout.id
+        @evaluation = GeminiAssistant.evaluate_workout @workout.id
 
-        # @workout.update(gemini_response: @evaluation)
-        @workout.gemini_response = "Hey it works"
+        @workout.update(gemini_response: @evaluation)
     end
 
     private

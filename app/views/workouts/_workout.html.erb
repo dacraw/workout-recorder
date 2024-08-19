@@ -1,13 +1,14 @@
 <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: "workout_evaluation" }, class: "btn-primary" %>
 
-<%= turbo_frame_tag "workout_evaluation" %>
-<div>
-  <% if workout.gemini_response.present? %>
-    <%= sanitize workout.gemini_response_html %>
-  <% else %>
-      <p>Add exercises to this workout in order to analyze it!</p>    
-  <% end %>
-</div>
+<%= turbo_frame_tag "workout_evaluation" do %>
+    <div>
+    <% if workout.gemini_response.present? %>
+        <%= sanitize workout.gemini_response_html %>
+    <% else %>
+        <p>Add exercises to this workout in order to analyze it!</p>    
+    <% end %>
+    </div>
+<% end %>
 
 <% if current_user == workout.user %>
     <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
