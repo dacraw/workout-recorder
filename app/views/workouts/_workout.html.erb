@@ -10,7 +10,8 @@
             <% end %>
         </div>
     <% end %>
-    <i class="fa-solid fa-spinner fa-spin loading-spinner hidden absolute top-0 left-0 right-0 m-auto w-[50px] h-[50px]"></i>
+    
+    <%= render "application/loading_spinner" %>
 </div>
 
 <% if current_user == workout.user %>
