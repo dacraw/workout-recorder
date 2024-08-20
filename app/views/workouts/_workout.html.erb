@@ -1,7 +1,9 @@
 <div class="<%= params[:workout_id].to_i == workout.id ? "active-workout rounded-t-none" : "hidden" %> p-2 exercises" id="workout-<%= workout.id %>" data-dropdown-target="toggleable activatable">
-    <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
 
-    <div class="relative">
+    <%= button_tag "Show Workout Analysis", class: 'btn-primary' %>
+
+    <div class="relative hidden" data-dropdown-target="toggleable">
+        <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
         <%= turbo_frame_tag dom_id(workout) + "_evaluation", class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
             <div>
                 <% if workout.gemini_response.present? %>
