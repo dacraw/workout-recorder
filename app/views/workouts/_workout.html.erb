@@ -1,5 +1,5 @@
 <div>
-    <% if current_user == workout.user %>
+    <% if current_user == workout.user && current_page?(my_workouts_path) %>
         <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
     <% end %>
 
