@@ -5,6 +5,10 @@ class WorkoutsController < ApplicationController
     before_action :set_workout, only: %i[ show destroy evaluate_workout ]
     before_action :check_author, only: :destroy
 
+    def index
+        @workouts = Workout.all
+    end
+
     def create
         @workout = Workout.new
         @workout.user = current_user
