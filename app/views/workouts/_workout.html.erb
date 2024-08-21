@@ -1,15 +1,20 @@
 <div class="<%= params[:workout_id].to_i == workout.id ? "active-workout rounded-t-none" : "hidden" %> p-2 exercises" id="workout-<%= workout.id %>" data-dropdown-target="toggleable activatable">
+    <% if current_user == workout.user %>
+        <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
+    <% end %>
 
-    <div data-controller="dropdown">
-        <%= button_tag "Show Workout Analysis", class: 'btn-primary', data: { action: "click->dropdown#toggle"} %>
+    <div data-controller="dropdown" class="ml-4">
+        <%= button_tag data: { action: "click->dropdown#toggle"}, class: "link flex gap-0" do %>
+            <i class="fa-solid fa-caret-right block w-[25px] h-[25px]" data-dropdown-target="rotatable"></i>
+            <span>Toggle Workout Analysis</span>
+        <% end %>
 
-        <div data-dropdown-target="rotatable"></div>
-
-        <div class="relative hidden" data-dropdown-target="toggleable">
+        <div class="relative border-b-2 pb-2 hidden" data-dropdown-target="toggleable">
             <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
             <%= turbo_frame_tag dom_id(workout) + "_evaluation", class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
                 <div>
                     <% if workout.gemini_response.present? %>
+                        <h3 class="text-xl underline">Workout Analysis</h3>
                         <%= sanitize workout.gemini_response_html %>
                     <% else %>
                         <p>Add exercises to this workout in order to analyze it!</p>    
@@ -21,20 +26,22 @@
         </div>
     </div>
 
-    <% if current_user == workout.user %>
-        <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
-    <% end %>
-
-    <div id="<%= dom_id(workout, "exercises") %>">
-        <% if workout.exercises.blank? %>
-            <p>
-                <i class="fa-solid fa-arrow-up"></i>
-                Click the "Add Exercise" button to add exercises to this workout
-            </p>
-        <% else %>
-            <% workout.exercises.order(date: :desc).each do |exercise| %>
-                <%= render "exercises/exercise", workout: workout, exercise: exercise %>
-            <% end %>
+    <div data-controller="dropdown" class="ml-4">
+        <%= button_tag data: { action: "click->dropdown#toggle" }, class: "link flex gap-0" do %>
+            <i class="fa-solid fa-caret-right block w-[25px] h-[25px]" data-dropdown-target="rotatable"></i>
+            <span>Toggle Exercises</span>
         <% end %>
+        <div id="<%= dom_id(workout, "exercises") %>" data-dropdown-target="toggleable" class="hidden">
+            <% if workout.exercises.blank? %>
+                <p>
+                    <i class="fa-solid fa-arrow-up"></i>
+                    Click the "Add Exercise" button to add exercises to this workout
+                </p>
+            <% else %>
+                <% workout.exercises.order(date: :desc).each do |exercise| %>
+                    <%= render "exercises/exercise", workout: workout, exercise: exercise %>
+                <% end %>
+            <% end %>
+        </div>
     </div>
 </div>

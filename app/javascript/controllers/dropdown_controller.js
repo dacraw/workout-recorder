@@ -5,6 +5,8 @@ export default class extends Controller {
 
   toggle() {
     this.toggleableTarget.classList.toggle("hidden");
+    if (this.rotatableTarget)
+      this.rotatableTarget.classList.toggle("rotate-90");
   }
 
   toggleAccordion() {
