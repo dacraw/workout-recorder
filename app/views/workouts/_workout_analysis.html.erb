@@ -1,5 +1,10 @@
-<%= turbo_frame_tag "modal" do %>
-    <div class="relative border-b-2 pb-2">
+<div data-controller="dropdown" class="p-2">
+    <%= button_tag data: { action: "click->dropdown#toggle"}, class: "link flex gap-0" do %>
+        <i class="fa-solid fa-caret-right block w-[25px] h-[25px]" data-dropdown-target="rotatable"></i>
+        <span>Toggle Workout Analysis</span>
+    <% end %>
+
+    <div class="relative pb-2 hidden bg-gray-600 p-2 mt-4" data-dropdown-target="toggleable">
         <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
         <%= turbo_frame_tag dom_id(workout) + "_evaluation", class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
             <div>
@@ -14,4 +19,4 @@
         
         <%= render "application/loading_spinner" %>
     </div>
-<% end %>
+</div>

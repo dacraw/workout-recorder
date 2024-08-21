@@ -1,5 +1,6 @@
 <h1 class="page-header">Everyone's Workouts</h1>
 
-<% @workouts.each do |workout| %>
+<% @workouts.order(date: :desc).each do |workout| %>
+    <h1><%= workout.date.strftime("%Y-%m-%d") %> by User <%= workout.user_id %></h1>
     <%= render "workout", workout: workout %>
 <% end %>
