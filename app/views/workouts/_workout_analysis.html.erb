@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "modal" do %>
+    <div class="relative border-b-2 pb-2">
+        <%= link_to "Generate Workout Analysis", evaluate_workout_workout_path(workout.id), data: { turbo_frame: dom_id(workout) + "_evaluation" }, class: "btn-primary" %>
+        <%= turbo_frame_tag dom_id(workout) + "_evaluation", class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
+            <div>
+                <% if workout.gemini_response.present? %>
+                    <h3 class="text-xl underline">Workout Analysis</h3>
+                    <%= sanitize workout.gemini_response_html %>
+                <% else %>
+                    <p>Add exercises to this workout in order to analyze it!</p>    
+                <% end %>
+            </div>
+        <% end %>
+        
+        <%= render "application/loading_spinner" %>
+    </div>
+<% end %>

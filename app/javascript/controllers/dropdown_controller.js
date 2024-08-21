@@ -5,11 +5,14 @@ export default class extends Controller {
 
   toggle() {
     this.toggleableTarget.classList.toggle("hidden");
+    if (this.rotatableTarget)
+      this.rotatableTarget.classList.toggle("rotate-90");
   }
 
   toggleAccordion() {
     this.rotateCaret();
     this.hideExercises();
+    console.log(this.toggleableTarget);
     this.toggleableTarget.classList.toggle("hidden");
     this.toggleActive();
   }
