@@ -229,6 +229,7 @@ GEM
       typhoeus (~> 1.4, >= 1.4.1)
     orm_adapter (0.5.0)
     os (1.1.4)
+    pagy (9.0.5)
     pg (1.5.7)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -361,6 +362,7 @@ DEPENDENCIES
   error_highlight (>= 0.4.0)
   importmap-rails
   nano-bots (~> 3.4.0)
+  pagy
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.3)
