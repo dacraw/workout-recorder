@@ -9,22 +9,31 @@
 
 <div class="fixed bottom-0 left-0 w-full h-[40px] bg-gray-600">
     <div class="p-2 w-full flex justify-between">
-        <% if @page > 1 %>
-            <%= link_to workouts_path(page: @page - 1), class: "flex items-center gap-2" do %>
-                <i class="fa-solid fa-angles-left w-[15px] h-[15px] block"></i>
-                <span>Previous Page</span>
+        <span class="flex-1">
+            <% if @pagy.prev %>
+                <%= link_to workouts_path(page: @pagy.prev), class: "flex items-center gap-2" do %>
+                    <i class="fa-solid fa-angles-left w-[15px] h-[15px] block"></i>
+                    <span>Previous Page</span>
+                <% end %>
+            <% else %>
+                <span></span>
             <% end %>
-        <% else %>
-            <span></span>
-        <% end %>
+        </span>
 
-        <% if @workouts.size == @per_page %>
-            <%= link_to workouts_path(page: @page + 1), class: "flex items-center gap-2" do %>
-                <span>Next Page</span>
-                <i class="fa-solid fa-angles-right w-[15px] h-[15px] block"></i>
+        <div>
+            <%== pagy_info @pagy %>
+        </div>
+
+        <span class="flex-1 flex justify-end">
+            <% if @pagy.next %>
+                <%= link_to workouts_path(page: @pagy.next), class: "flex items-center gap-2 text-right" do %>
+                    <span>Next Page</span>
+                    <i class="fa-solid fa-angles-right w-[15px] h-[15px] block"></i>
+                <% end %>
+            <% else %>
+                <span></span>
             <% end %>
-        <% else %>
-            <span></span>
-        <% end %>
+        </span>
     </div>
 </div>
+

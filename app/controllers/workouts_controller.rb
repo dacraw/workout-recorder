@@ -6,10 +6,7 @@ class WorkoutsController < ApplicationController
     before_action :check_author, only: :destroy
 
     def index
-        @page = params[:page].nil? ? 1 : params[:page].to_i
-        @per_page = 10
-        offset = (@page - 1) * @per_page
-        @workouts = Workout.limit(@per_page).offset(offset)
+        @pagy, @workouts = pagy(Workout.all)
     end
 
     def create
