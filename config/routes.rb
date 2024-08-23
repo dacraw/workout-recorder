@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :workouts, only: [:index, :create, :show, :destroy] do
     member do
       get 'evaluate_workout', to: "workouts#evaluate_workout"
+      get "suggest_exercise", to: "workouts#suggest_exercise"
     end
 
     resources :exercises, except: [:index, :show]

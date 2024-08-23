@@ -44,6 +44,10 @@ class WorkoutsController < ApplicationController
         @workout.update(gemini_response: GeminiAssistant.evaluate_workout(@workout.id))
     end
 
+    def suggest_exercise
+        
+    end
+
     private
     def set_workout
         @workout ||= Workout.find params[:id]
