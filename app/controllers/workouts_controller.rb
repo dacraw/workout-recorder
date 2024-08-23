@@ -6,7 +6,7 @@ class WorkoutsController < ApplicationController
     before_action :check_author, only: :destroy
 
     def index
-        @pagy, @workouts = pagy(Workout.all)
+        @pagy, @workouts = pagy(Workout.with_exercises)
     end
 
     def create
