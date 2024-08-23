@@ -23,7 +23,7 @@
         <% unless true %>
           <%= render "exercises/exercises_show_link", workout: workout, exercise: exercise %>
         <% end %>
-        <% if current_user == exercise.user %>
+        <% if current_user == workout.user %>
           <%= render "exercises/exercises_edit_link", workout: workout, exercise: exercise %>
           <%= render "exercises/exercises_destroy_link", workout: workout, exercise: exercise %>
         <% end %>
