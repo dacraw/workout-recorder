@@ -2,38 +2,12 @@
 
 <div class="mb-[40px]">
     <% @workouts.order(date: :desc).each_with_index do |workout, idx| %>
-        <h1><span><%= idx + 1 %> - </span><%= workout.date.strftime("%Y-%m-%d") %> by User <%= workout.user_id %></h1>
-        <%= render "workout", workout: workout %>
+        <div class="mb-2">
+            <h1><%= workout.date.strftime("%Y-%m-%d") %> by User <%= workout.user_id %></h1>
+            <%= render "workout", workout: workout %>
+        </div>
     <% end %>
 </div>
 
-<div class="fixed bottom-0 left-0 w-full h-[40px] bg-gray-600">
-    <div class="p-2 w-full flex justify-between">
-        <span class="flex-1">
-            <% if @pagy.prev %>
-                <%= link_to workouts_path(page: @pagy.prev), class: "flex items-center gap-2" do %>
-                    <i class="fa-solid fa-angles-left w-[15px] h-[15px] block"></i>
-                    <span>Previous Page</span>
-                <% end %>
-            <% else %>
-                <span></span>
-            <% end %>
-        </span>
-
-        <div>
-            <%== pagy_info @pagy %>
-        </div>
-
-        <span class="flex-1 flex justify-end">
-            <% if @pagy.next %>
-                <%= link_to workouts_path(page: @pagy.next), class: "flex items-center gap-2 text-right" do %>
-                    <span>Next Page</span>
-                    <i class="fa-solid fa-angles-right w-[15px] h-[15px] block"></i>
-                <% end %>
-            <% else %>
-                <span></span>
-            <% end %>
-        </span>
-    </div>
-</div>
+<%= render "index_nav" %>
 
