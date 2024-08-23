@@ -6,7 +6,8 @@ class WorkoutsController < ApplicationController
     before_action :check_author, only: :destroy
 
     def index
-        @pagy, @workouts = pagy(Workout.with_exercises)
+        # Select Workouts that have exercises in them
+        @pagy, @workouts = pagy(Workout.includes(:user, :exercises).where.not(exercises: { id: nil }).distinct)
     end
 
     def create
@@ -36,7 +37,7 @@ class WorkoutsController < ApplicationController
     end
 
     def my_workouts
-        @workouts = current_user.workouts
+        @workouts = current_user.workouts.includes(:exercises)
     end
 
     def evaluate_workout
