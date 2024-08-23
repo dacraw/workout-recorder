@@ -1,0 +1,13 @@
+<h1 class="page-header">Everyone's Workouts</h1>
+
+<div class="mb-[40px]">
+    <% @workouts.order(date: :desc).each_with_index do |workout, idx| %>
+        <div class="mb-2">
+            <h1><%= workout.date.strftime("%Y-%m-%d") %> by User <%= workout.user_id %></h1>
+            <%= render "workout", workout: workout %>
+        </div>
+    <% end %>
+</div>
+
+<%= render "index_nav" %>
+

@@ -6,6 +6,8 @@ class Workout < ApplicationRecord
 
     validates :user, presence: true
 
+    scope :with_exercises, -> { Workout.includes(:exercises).where.not(exercises: { id: nil }).distinct }
+    
     before_create :set_date
 
     def gemini_response_html
