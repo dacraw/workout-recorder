@@ -37,7 +37,7 @@ class WorkoutsController < ApplicationController
     end
 
     def my_workouts
-        @workouts = current_user.workouts
+        @workouts = current_user.workouts.includes(:exercises)
     end
 
     def evaluate_workout
