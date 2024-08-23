@@ -11,7 +11,7 @@
             <span>Toggle Exercises</span>
         <% end %>
         <div id="<%= dom_id(workout, "exercises") %>" data-dropdown-target="toggleable" class="hidden bg-gray-600 p-2 mt-4">
-            <% if workout.exercises.blank? %>
+            <% if workout.exercises.blank? && current_user == workout.user %>
                 <p>
                     <i class="fa-solid fa-arrow-up"></i>
                     Click the "Add Exercise" button to add exercises to this workout
