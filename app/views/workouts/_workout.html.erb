@@ -4,7 +4,7 @@
     <% end %>
 
     <div>
-        <%= form_with url: suggest_exercise_based_on_prompt_workout_path(workout), method: :get do |form| %>
+        <%= form_with url: suggest_exercise_based_on_type_workout_path(workout), method: :get do |form| %>
             <div>
                 <%= form.label :exercise_prompt, style: "display: block" %>
                 <%= form.text_field :exercise_prompt %>

@@ -64,7 +64,7 @@ module GeminiAssistant
         )
     end
 
-    def suggest_exercise_based_on_prompt(prompt, existing_exercise_info)
+    def suggest_exercise_based_on_type(prompt, existing_exercise_info)
         # allow user to type a prompt to base a suggested exercise on
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
