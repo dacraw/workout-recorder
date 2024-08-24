@@ -75,6 +75,9 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    acts-as-taggable-on (11.0.0)
+      activerecord (>= 7.0, < 8.0)
+      zeitwerk (>= 2.4, < 3.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     anthropic (0.3.0)
@@ -358,6 +361,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts-as-taggable-on (~> 11.0.0)
   bootsnap
   bullet
   capybara
@@ -367,7 +371,7 @@ DEPENDENCIES
   error_highlight (>= 0.4.0)
   importmap-rails
   nano-bots (~> 3.4.0)
-  pagy
+  pagy (~> 9.0.5)
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.3)
