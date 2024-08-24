@@ -74,4 +74,17 @@ module GeminiAssistant
         HEREDOC
         )
     end
+
+    def suggest_exercise_based_on_prompt(prompt, existing_exercise_info)
+        # allow user to type a prompt to base a suggested exercise on
+        bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
+
+        bot.eval(<<-HEREDOC
+            Suggest an exercise based on this prompt: #{prompt}
+
+            The suggested exercise should not be a duplicate of any of these exercises:
+            #{existing_exercise_info}
+        HEREDOC
+        )
+    end
 end
