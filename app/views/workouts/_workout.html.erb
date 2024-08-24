@@ -4,7 +4,7 @@
     <% end %>
 
     <div>
-        <%= link_to "Suggest Exercise", suggest_exercise_workout_path(workout), class: "btn-primary", data: { turbo_frame: "modal" } %>
+        <%= link_to "Suggest Exercise", suggest_exercise_workout_path(workout), class: "btn-primary", data: { turbo_frame: "modal", turbo_prefetch: false } %>
     </div>
 
     <%= render "workout_analysis", workout: workout if current_page?(my_workouts_path) %>

@@ -69,7 +69,7 @@ module GeminiAssistant
 
             Prompt: Suggest an exercise that falls into the same muscle categories as the example exercises, but isn't a duplicate of an existing exercise. The suggestion should have the following format:
 
-            name: <<NAME OF EXERCISE>> (the name should be in bold font)
+            <<NAME OF EXERCISE>> (the name should be in bold font)
             <<ONE SENTENCE DESCRIPTION OF THE EXERCISE>>
         HEREDOC
         )
