@@ -22,7 +22,8 @@
       <% end %>
     </div>
 
-    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-600 z-20">
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-600 z-20 max-h-[90vh] overflow-auto
+     md:max-w-80">
       <%= turbo_frame_tag "modal", class: "[&[busy]]:blur-sm [&[busy]+div]:block" %>
       <%= render "application/loading_spinner" %>
     </div>
