@@ -30,7 +30,6 @@ module GeminiAssistant
         end
 
         begin
-
             bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
             bot.eval(
@@ -67,18 +66,23 @@ module GeminiAssistant
     def suggest_exercise_based_on_type(type, existing_exercise_info)
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
-        bot.eval(<<-HEREDOC
-            Suggest an exercise based on the following muscle groups: #{type}
+        begin
+            bot.eval(<<-HEREDOC
+                Suggest an exercise based on the following muscle groups: #{type}
 
-            The suggested exercise should not be a duplicate of any of these exercises:
-            #{existing_exercise_info}
+                The suggested exercise should not be a duplicate of any of these exercises:
+                #{existing_exercise_info}
 
-            Please provide the suggestion in the following format:
-            Name: <<EXERCISE NAME>>
-            Description: <<EXERCISE SETS AND REPS>>
+                Please provide the suggestion in the following format:
+                Name: <<EXERCISE NAME>>
+                Description: <<EXERCISE SETS AND REPS>>
 
-            The description should be no longer than one sentence.
-        HEREDOC
-        )
+                The description should be no longer than one sentence.
+            HEREDOC
+            )
+        rescue StandardError => e 
+            puts "Error with suggest_exercise_based_on_type: #{e}"
+            "There was a safety issue evaluating the exercise - please ensure you are using appropriate language and try editing then saving the exercise to re-generate an analysis."
+        end
     end
 end
