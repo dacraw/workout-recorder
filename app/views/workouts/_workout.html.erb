@@ -5,11 +5,7 @@
 
     <div>
         <%= form_with url: suggest_exercise_based_on_type_workout_path(workout), method: :get do |form| %>
-            <div>
-                <%= form.label :exercise_prompt, style: "display: block" %>
-                <%= form.text_field :exercise_prompt %>
-            </div>
-
+            <%= render "application/tag_selector", form: form %>
             <div>
                 <%= form.button class: "btn-primary", data: { turbo_frame: "modal", turbo_prefetch: false } do %>
                     Suggest Exercise
