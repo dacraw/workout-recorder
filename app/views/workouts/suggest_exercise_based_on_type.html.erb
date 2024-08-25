@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
-    <div class="p-2" data-controller="turbo-modal" data-action="click@window->turbo-modal#closeBackground" data-turbo-modal-target="modal">
+    <div class="p-4" data-controller="turbo-modal" data-action="click@window->turbo-modal#closeBackground" data-turbo-modal-target="modal">
         <p><%= sanitize @html_response %></p>
 
         <p><%= button_tag "Close", data: { action: "click->turbo-modal#hideModal" }, class: "btn-cancel" %></p>
