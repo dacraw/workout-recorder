@@ -65,7 +65,6 @@ module GeminiAssistant
     end
 
     def suggest_exercise_based_on_type(type, existing_exercise_info)
-        # suggest exercise based on tags
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
         bot.eval(<<-HEREDOC
@@ -74,7 +73,11 @@ module GeminiAssistant
             The suggested exercise should not be a duplicate of any of these exercises:
             #{existing_exercise_info}
 
-            Please provide only one suggestion, as close to the provide muscle groups as you can and as concise as possible.
+            Please provide the suggestion in the following format:
+            Name: <<EXERCISE NAME>>
+            Description: <<EXERCISE SETS AND REPS>>
+
+            The description should be no longer than one sentence.
         HEREDOC
         )
     end
