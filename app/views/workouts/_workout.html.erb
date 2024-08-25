@@ -1,9 +1,9 @@
 <div>
     <% if current_user == workout.user && current_page?(my_workouts_path) %>
-        <p><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
+        <p class="mb-2"><%= link_to "Add Exercise", new_workout_exercise_path(workout), class:"btn-primary", data: { turbo_frame: 'modal' } %></p>
     <% end %>
 
-    <div>
+    <div class="mb-2">
         <%= form_with url: suggest_exercise_based_on_type_workout_path(workout), method: :get do |form| %>
             <%= render "application/tag_selector", form: form %>
             <div>
