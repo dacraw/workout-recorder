@@ -45,9 +45,11 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'nano-bots', '~> 3.4.0'
+gem "nano-bots", "~> 3.4.0"
 
-gem 'pagy'
+gem "pagy", "~> 9.0.5"
+
+gem "acts-as-taggable-on", "~> 11.0.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

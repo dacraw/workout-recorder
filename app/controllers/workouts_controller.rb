@@ -2,7 +2,7 @@ include GeminiAssistant
 
 class WorkoutsController < ApplicationController
     before_action :authenticate_user!, except: %i[ index ]
-    before_action :set_workout, only: %i[ show destroy evaluate_workout ]
+    before_action :set_workout, only: %i[ show destroy evaluate_workout suggest_exercise_based_on_type ]
     before_action :check_author, only: :destroy
 
     def index
@@ -42,6 +42,15 @@ class WorkoutsController < ApplicationController
 
     def evaluate_workout
         @workout.update(gemini_response: GeminiAssistant.evaluate_workout(@workout.id))
+    end
+
+    def suggest_exercise_based_on_type
+        response = GeminiAssistant.suggest_exercise_based_on_type(params[:exercise_prompt], @workout.exercises.map {|exercise| "name: #{exercise.name}, description: #{exercise.description}"}.join(';'))
+
+        @selected_tags = params[:exercise_prompt]
+
+        rc = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+        @html_response = rc.render response
     end
 
     private
