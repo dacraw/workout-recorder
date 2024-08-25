@@ -47,7 +47,10 @@ class WorkoutsController < ApplicationController
     def suggest_exercise_based_on_type
         response = GeminiAssistant.suggest_exercise_based_on_type(params[:exercise_prompt], @workout.exercises.map {|exercise| "name: #{exercise.name}, description: #{exercise.description}"}.join(';'))
 
-        @html_response = Redcarpet::Markdown.new(Redcarpet::Render::HTML).render response
+        @selected_tags = params[:exercise_prompt]
+
+        rc = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+        @html_response = rc.render response
     end
 
     private

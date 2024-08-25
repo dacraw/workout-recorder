@@ -1,6 +1,8 @@
 <%= turbo_frame_tag "modal" do %>
     <div class="p-4" data-controller="turbo-modal" data-action="click@window->turbo-modal#closeBackground" data-turbo-modal-target="modal">
-        <p><%= sanitize @html_response %></p>
+        <p class="mb-2"><strong class="font-bold">Selected Muscle Groups:</strong> <%= @selected_tags %></p>
+        <h3 class="m-0"><strong class="font-bold">Suggestion:</strong></h3>
+        <div class="mb-2"><%= sanitize @html_response %></div>
 
         <p><%= button_tag "Close", data: { action: "click->turbo-modal#hideModal" }, class: "btn-cancel" %></p>
     </div>
