@@ -46,23 +46,6 @@ module GeminiAssistant
         end
     end
 
-    def suggest_exercise(existing_exercise_info)
-        # pass in the information from existing exercises, e.g. name: ...; description: ...;
-        bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
-
-        bot.eval(<<-HEREDOC
-            The current workout contains the following exercises:
-            #{existing_exercise_info}
-
-
-            Prompt: Suggest an exercise that falls into the same muscle categories as the example exercises, but isn't a duplicate of an existing exercise. The suggestion should have the following format:
-
-            <<NAME OF EXERCISE>> (the name should be in bold font)
-            <<ONE SENTENCE DESCRIPTION OF THE EXERCISE>>
-        HEREDOC
-        )
-    end
-
     def suggest_exercise_based_on_type(type, existing_exercise_info)
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
