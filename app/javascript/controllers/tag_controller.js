@@ -15,7 +15,6 @@ export default class extends Controller {
       this.tagList.push(tag);
     }
     this.taglistTarget.value = this.tagList.join(",");
-    console.log(this.taglistTarget.value);
   }
 
   connect() {
