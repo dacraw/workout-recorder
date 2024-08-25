@@ -56,11 +56,7 @@ module GeminiAssistant
                 The suggested exercise should not be a duplicate of any of these exercises:
                 #{existing_exercise_info}
 
-                Please provide the suggestion in the following format:
-                Name: <<EXERCISE NAME>>
-                Description: <<EXERCISE SETS AND REPS>>
-
-                The description should be no longer than one sentence.
+                Please provide only the exercise name and sets/reps, separated by a hyphen. Please provide only one exercise.
             HEREDOC
             )
         rescue StandardError => e 
