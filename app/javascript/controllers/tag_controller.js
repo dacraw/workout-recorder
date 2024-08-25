@@ -3,17 +3,22 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="tag"
 export default class extends Controller {
   static targets = ["taglist"];
-  tagList = [];
 
   toggleTag(e) {
-    console.log(this.taggableTarget);
     const tag = e.target.innerText;
     e.currentTarget.classList.toggle("bg-green-600");
 
-    console.log(e.currentTarget);
-    this.tagList.push(tag);
-    this.taglistTarget.value = this.tagList.join(";");
+    if (this.tagList.includes(tag)) {
+      const existingTagIdx = this.tagList.indexOf(tag);
+      this.tagList.splice(existingTagIdx, 1);
+    } else {
+      this.tagList.push(tag);
+    }
+    this.taglistTarget.value = this.tagList.join(",");
+    console.log(this.taglistTarget.value);
   }
 
-  connect() {}
+  connect() {
+    this.tagList = [];
+  }
 }

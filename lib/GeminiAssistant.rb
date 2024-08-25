@@ -64,15 +64,17 @@ module GeminiAssistant
         )
     end
 
-    def suggest_exercise_based_on_type(prompt, existing_exercise_info)
-        # allow user to type a prompt to base a suggested exercise on
+    def suggest_exercise_based_on_type(type, existing_exercise_info)
+        # suggest exercise based on tags
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
         bot.eval(<<-HEREDOC
-            Suggest an exercise based on this prompt: #{prompt}
+            Suggest an exercise based on the following muscle groups: #{type}
 
             The suggested exercise should not be a duplicate of any of these exercises:
             #{existing_exercise_info}
+
+            Please provide only one suggestion, as close to the provide muscle groups as you can and as concise as possible.
         HEREDOC
         )
     end
