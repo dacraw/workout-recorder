@@ -1,22 +1,38 @@
 <h1 class="page-header">Let's Analyze Your Workouts!</h1>
-<p>
-    <%= link_to my_workouts_path, class: "btn-primary" do %>
-        <span>View Workout Log</span>
-        <span>
-            <i class="fa-solid fa-eye"></i>
-            <i class="fa-regular fa-file"></i>
-        </span>
-    <% end %>
-</p>
-<p>
-    <%= button_to workouts_path, method: :post, class: "btn-primary" do %>
-        <span>Create New Workout</span>
-        <span>
-            <i class="fa-solid fa-square-plus"></i>
-            <i class="fa-solid fa-dumbbell"></i>
-        </span>
-    <% end %>
-</p>
+
+<div class="mb-4">
+    <p>
+        <%= link_to my_workouts_path, class: "btn-primary" do %>
+            <span>View Workout Log</span>
+            <span>
+                <i class="fa-solid fa-eye"></i>
+                <i class="fa-regular fa-file"></i>
+            </span>
+        <% end %>
+    </p>
+    <p>
+        <%= button_to workouts_path, method: :post, class: "btn-primary" do %>
+            <span>Create New Workout</span>
+            <span>
+                <i class="fa-solid fa-square-plus"></i>
+                <i class="fa-solid fa-dumbbell"></i>
+            </span>
+        <% end %>
+    </p>
+</div>
+
+<div class="border-t-2 pt-4">
+    <div class="mb-4">
+        <h3 class="font-bold text-xl">About this website</h3>
+        <p>This is a project website that I designed to better help me record my workouts at the gym by logging exercise sets/reps and using Google Gemini AI to analyze the workout and provide helpful feedback.</p>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="font-bold text-xl">Technical Information</h4>
+        <p>This project is built using Rails 7 on the backend and frontend. StimulusJS is used to pepper Javascript into the views in order to increase interactivity, for example by toggling the responsive header navigation menu.</p>
+        <p>Google Gemini AI is used to analyze individual exercises and provide an analysis of the workout based on the information provided by the user and prompt templates in the backend. <strong class="font-semibold">Please note that AI chatbot responses aren't perfect, nor is this project using the most advanced version of Google Gemini.</strong></p>
+    </div>
+</div>
 
 <% content_for :footer do %>
     <div class="bg-gray-400 text-gray-800 p-4">
