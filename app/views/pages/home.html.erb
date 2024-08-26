@@ -17,3 +17,22 @@
         </span>
     <% end %>
 </p>
+
+<% content_for :footer do %>
+    <div class="bg-gray-400 text-gray-800 p-4">
+        <p>This website is produced by Douglas Crawford and uses the Rails 7 framework. Please contact me if you have any Full-Stack Software Engineer opportunities available!</p>
+
+        <br />
+
+        <div >
+            <div class="grid grid-cols-[75px_auto]">
+                <p><strong class="font-bold">Email: </strong></p>
+                <p>doug.a.crawford@gmail.com</p>
+            </div>
+            <div class="grid grid-cols-[75px_auto]">
+                <p><strong class="font-bold">Github: </strong>
+                <p><a href="https://github.com/dacraw" target="_blank" class="font-semibold underline">dacraw</a></p>
+            </div>
+        </div>
+    </div>
+<% end %>
