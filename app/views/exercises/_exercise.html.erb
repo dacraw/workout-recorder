@@ -2,10 +2,7 @@
 
   <%= render "exercise_sets/form", workout: workout, exercise: exercise, exercise_set: ExerciseSet.new %>
 
-  <% if exercise.exercise_sets.count > 0 %>
-      <p>Sets:</p>
-      <%= turbo_frame_tag workout_exercise_exercise_sets_path(workout, exercise), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>
-  <% end %>
+  <%= turbo_frame_tag workout_exercise_exercise_sets_path(workout, exercise), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>
 
   <p>
     <span class="font-bold">Name:</span>
