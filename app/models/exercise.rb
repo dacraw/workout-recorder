@@ -16,6 +16,7 @@ class Exercise < ApplicationRecord
 
     belongs_to :workout, optional: false
     has_one :user, through: :workout
+    has_many :exercise_sets
     
     # TODO: Only call this in name/description field changes to minimize Google API calls
     before_save :set_gemini_response

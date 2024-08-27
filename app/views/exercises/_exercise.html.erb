@@ -1,5 +1,8 @@
 <div id="<%= dom_id exercise %>">
   <p class="italic"><span> <%= exercise.date.strftime "%Y-%m-%d" %></p>
+
+  <%= turbo_frame_tag dom_id(workout, exercise), src: workout_exercise_exercise_sets_path(workout, exercise) %>
+  
   <p>
     <span class="font-bold">Name:</span>
     <%= exercise.name %>
