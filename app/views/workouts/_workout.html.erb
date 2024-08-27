@@ -19,17 +19,6 @@
     <%= render "workout_analysis", workout: workout if current_page?(my_workouts_path) %>
 
     <div class="p-2">
-        <div id="<%= dom_id(workout, "exercises") %>" class=" bg-gray-600 p-2 mt-4">
-            <% if workout.exercises.blank? && current_user == workout.user %>
-                <p>
-                    <i class="fa-solid fa-arrow-up"></i>
-                    Click the "Add Exercise" button to add exercises to this workout
-                </p>
-            <% else %>
-                <% workout.exercises.order(date: :desc).each do |exercise| %>
-                    <%= render "exercises/exercise", workout: workout, exercise: exercise %>
-                <% end %>
-            <% end %>
-        </div>
+        <%= turbo_frame_tag workout_exercises_path(workout), src: workout_exercises_path(workout), loading: "lazy" %>    
     </div>
 </div>

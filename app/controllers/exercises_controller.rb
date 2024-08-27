@@ -4,6 +4,10 @@ class ExercisesController < ApplicationController
   before_action :set_workout
   before_action :check_author, except: [:index, :show]
 
+  def index
+    @exercises = @workout.exercises
+  end
+
   def new
     @exercise = Exercise.new
   end
