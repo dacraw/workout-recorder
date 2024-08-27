@@ -12,6 +12,10 @@ class ExerciseSetsController < ApplicationController
         end
     end
 
+    def new
+
+    end
+
     private
 
     def exercise_set_params
