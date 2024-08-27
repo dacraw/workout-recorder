@@ -2,8 +2,9 @@
 
   <%= render "exercise_sets/form", workout: workout, exercise: exercise, exercise_set: ExerciseSet.new %>
 
-  <%= turbo_frame_tag workout_exercise_exercise_sets_path(workout, exercise), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>
-
+  <div class="my-4">
+    <%= turbo_frame_tag workout_exercise_exercise_sets_path(workout, exercise), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>
+  </div>
   <p>
     <span class="font-bold">Name:</span>
     <%= exercise.name %>
