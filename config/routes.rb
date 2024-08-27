@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get 'suggest_exercise_based_on_type', to: "workouts#suggest_exercise_based_on_type"
     end
 
-    resources :exercises, except: [:show] do
+    resources :exercises do
       resources :exercise_sets, only: [:index]
     end
   end

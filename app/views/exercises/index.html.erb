@@ -1,8 +1,14 @@
 <%= turbo_frame_tag workout_exercises_path(@workout) do %>
   <div>
     <% @exercises.order(created_at: :desc).each do |exercise| %>
-      <div class="mb-4 border-2 p-2">
-          <%= render exercise, workout: @workout, exercise: exercise %>
+      <div class="mb-4 border-2 p-2" data-controller="dropdown" data-action="click->dropdown#toggle" >
+          <div class="flex items-center">
+            <i class="fa-solid fa-caret-right block w-[25px] h-[25px]" data-dropdown-target="rotatable"></i>
+            <p><%= exercise.name %></p>
+          </div>
+          <div data-dropdown-target="toggleable" class="hidden">
+            <%= turbo_frame_tag dom_id(exercise), src: workout_exercise_path(@workout, exercise), loading: "lazy" %>
+          </div>
       </div>
     <% end %>
   </div>
