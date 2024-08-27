@@ -1,5 +1,6 @@
 class ExerciseSetsController < ApplicationController
     before_action :set_exercise
+    before_action :set_workout
     
     def index
         @exercise_sets = @exercise.exercise_sets
@@ -22,4 +23,11 @@ class ExerciseSetsController < ApplicationController
 
         # add handler for blank exercise (redirect to new path)
     end
+
+    def set_workout
+        @workout = Workout.find_by_id(params[:workout_id])
+
+        # add handler for blank exercise (redirect to new path)
+    end
+
 end
