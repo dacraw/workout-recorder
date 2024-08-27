@@ -7,8 +7,13 @@ class ExerciseSetsController < ApplicationController
     end
     
     def create
-        respond_to do |format|
-            format.turbo_stream
+        @exercise_set = @exercise.exercise_sets.new(exercise_set_params)
+
+        if @exercise_set.save
+            respond_to do |format|
+                format.turbo_stream { render turbo_stream: turbo_stream.prepend(workout_exercise_exercise_sets_path(@workout, @exercise), partial: "exercise_sets/exercise_set", locals: { set: @exercise_set }) }
+            end
+            # add an else that redirects if save fails
         end
     end
 
@@ -19,7 +24,7 @@ class ExerciseSetsController < ApplicationController
     private
 
     def exercise_set_params
-        params.require(:exercise_set).permit(:reps, :weight, :weight_unit, :description)
+        params.require(:exercise_set).permit(:reps, :weight, :weight_unit)
     end
 
     def set_exercise

@@ -1,0 +1,17 @@
+<%= form_with(model: [workout, exercise, exercise_set]) do |f| %>
+    <div class="field">
+        <%= f.label :reps %><br />
+        <%= f.number_field :reps %>
+    </div>
+    <div class="field">
+        <%= f.label :weight %><br />
+        <%= f.number_field :weight %>
+    </div>
+    <div class="field">
+        <%= f.label :weight_unit %><br />
+        <%= f.select :weight_unit, ["lbs", "grams"] %>
+    </div>
+    <div>
+        <%= f.submit class: 'btn-primary' %>
+    </div>
+<% end %>

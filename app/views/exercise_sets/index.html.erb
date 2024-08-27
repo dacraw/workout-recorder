@@ -1,6 +1,5 @@
 <%= turbo_frame_tag workout_exercise_exercise_sets_path(@workout, @exercise) do %>
-    <p>Sets:</p>
     <% @exercise_sets.map do |set| %>
-        <p><%= set.id %></p>
+        <%= render "exercise_set", set: set %>
     <% end %>
 <% end %>
