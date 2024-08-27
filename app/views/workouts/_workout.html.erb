@@ -18,12 +18,8 @@
     
     <%= render "workout_analysis", workout: workout if current_page?(my_workouts_path) %>
 
-    <div data-controller="dropdown" class="p-2">
-        <%= button_tag data: { action: "click->dropdown#toggle" }, class: "link flex gap-0" do %>
-            <i class="fa-solid fa-caret-right block w-[25px] h-[25px]" data-dropdown-target="rotatable"></i>
-            <span>Toggle Exercises</span>
-        <% end %>
-        <div id="<%= dom_id(workout, "exercises") %>" data-dropdown-target="toggleable" class="hidden bg-gray-600 p-2 mt-4">
+    <div class="p-2">
+        <div id="<%= dom_id(workout, "exercises") %>" class=" bg-gray-600 p-2 mt-4">
             <% if workout.exercises.blank? && current_user == workout.user %>
                 <p>
                     <i class="fa-solid fa-arrow-up"></i>
