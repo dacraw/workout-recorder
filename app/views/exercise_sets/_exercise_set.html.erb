@@ -1,1 +1,7 @@
- <p>Set: <%= set.reps %> reps, <%= set.weight %> <%= set.weight_unit %></p>
+<div id="<%= workout_exercise_exercise_set_path(workout, exercise, set) %>">
+    <p>Set: <%= set.reps %> reps, <%= set.weight %> <%= set.weight_unit %></p>
+
+    <%= button_to workout_exercise_exercise_set_path(workout, exercise, set), method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+        <i class="fa-regular fa-trash-can"></i>
+    <% end %>
+</div>

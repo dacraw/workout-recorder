@@ -1,6 +1,7 @@
 class ExerciseSetsController < ApplicationController
     before_action :set_exercise
     before_action :set_workout
+    before_action :set_exercise_set, only: [:destroy]
     
     def index
         @exercise_sets = @exercise.exercise_sets
@@ -11,7 +12,7 @@ class ExerciseSetsController < ApplicationController
 
         if @exercise_set.save
             respond_to do |format|
-                format.turbo_stream { render turbo_stream: turbo_stream.prepend(workout_exercise_exercise_sets_path(@workout, @exercise), partial: "exercise_sets/exercise_set", locals: { set: @exercise_set }) }
+                format.turbo_stream { render turbo_stream: turbo_stream.prepend(workout_exercise_exercise_sets_path(@workout, @exercise), partial: "exercise_sets/exercise_set", locals: { workout: @workout, exercise: @exercise, set: @exercise_set }) }
             end
             # add an else that redirects if save fails
         end
@@ -19,6 +20,14 @@ class ExerciseSetsController < ApplicationController
 
     def new
 
+    end
+
+    def destroy
+        @exercise_set.destroy
+
+        respond_to do |format|
+            format.turbo_stream { render turbo_stream: turbo_stream.remove(workout_exercise_exercise_set_path(@workout, @exercise, @exercise_set))}
+        end
     end
 
     private
@@ -37,6 +46,10 @@ class ExerciseSetsController < ApplicationController
         @workout = Workout.find_by_id(params[:workout_id])
 
         # add handler for blank exercise (redirect to new path)
+    end
+
+    def set_exercise_set
+        @exercise_set = ExerciseSet.find(params[:id])
     end
 
 end
