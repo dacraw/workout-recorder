@@ -11,18 +11,18 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="mb-2">
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder: "e.g. Bicep Curls, Zumba, Swimming", class: "placeholder:text-sm w-full md:w-[unset]" %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.label :description, "Description (optional)", style: "display: block" %>
+    <%= form.text_field :description, placeholder: 'e.g. Ran for 2 miles', class: "placeholder:text-sm w-full md:w-[unset]" %>
   </div>
 
   <div>
-    <%= form.button type: :submit, class: "btn-primary" do %>
+    <%= form.button type: :submit, class: "btn-primary mt-2 w-full justify-center md:w-[unset]" do %>
       <% if exercise.new_record? %>
         <span>Create Exercise</span>
         <div>
