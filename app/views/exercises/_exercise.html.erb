@@ -1,6 +1,8 @@
 <div id="<%= dom_id exercise %>">
 
-  <%= render "exercise_sets/form", workout: workout, exercise: exercise, exercise_set: ExerciseSet.new %>
+  <%= turbo_frame_tag new_workout_exercise_exercise_set_path(workout, exercise) do %>
+    <%= render "exercise_sets/form", workout: workout, exercise: exercise, exercise_set: ExerciseSet.new %>
+  <% end %>
 
   <div class="my-4">
     <%= turbo_frame_tag workout_exercise_exercise_sets_path(workout, exercise), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>

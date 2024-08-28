@@ -10,11 +10,12 @@ class ExerciseSetsController < ApplicationController
     def create
         @exercise_set = @exercise.exercise_sets.new(exercise_set_params)
 
-        if @exercise_set.save
-            respond_to do |format|
+        respond_to do |format|
+            if @exercise_set.save
                 format.turbo_stream { render turbo_stream: turbo_stream.prepend(workout_exercise_exercise_sets_path(@workout, @exercise), partial: "exercise_sets/exercise_set", locals: { workout: @workout, exercise: @exercise, exercise_set: @exercise_set }) }
+            else
+                format.html { render :new, status: :unprocessable_entity }
             end
-            # add an else that redirects if save fails
         end
     end
 

@@ -1,1 +1,3 @@
-<%= render "form", workout: @workout, exercise: @exercise, exercise_set: @exercise_set %>
+<%= turbo_frame_tag new_workout_exercise_exercise_set_path(@workout, @exercise) do %>
+    <%= render "form", workout: @workout, exercise: @exercise, exercise_set: @exercise_set %>
+<% end %>
