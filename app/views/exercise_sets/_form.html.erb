@@ -1,10 +1,10 @@
 <%= form_with(model: [workout, exercise, exercise_set]) do |f| %>
     <div class="flex items-end gap-x-2">
-        <div class="basis-0">
+        <div class="basis-1/5 md:basis-14">
             <%= f.label :reps, class: "font-bold" %><br />
             <%= f.number_field :reps, class: "w-full h-8 py-0 px-1 " %>
         </div>
-        <div class="basis-0">
+        <div class="basis-1/5 md:basis-24">
             <%= f.label :weight, class: "font-bold" %><br />
             <%= f.number_field :weight, class: "w-full h-8 py-0 px-1" %>
         </div>
