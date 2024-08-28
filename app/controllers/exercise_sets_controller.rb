@@ -38,6 +38,8 @@ class ExerciseSetsController < ApplicationController
         respond_to do |format|
             if @exercise_set.update(exercise_set_params)
                 format.turbo_stream { render turbo_stream: turbo_stream.replace(@exercise_set, partial: "exercise_sets/exercise_set", locals: { workout: @workout, exercise: @exercise, exercise_set: @exercise_set}) }
+            else
+                format.html { render :edit, status: :unprocessable_entity }
             end
         end
     end
