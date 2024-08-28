@@ -16,7 +16,7 @@ class Exercise < ApplicationRecord
 
     belongs_to :workout, optional: false
     has_one :user, through: :workout
-    has_many :exercise_sets
+    has_many :exercise_sets, dependent: :destroy
 
     validates_presence_of :name
     
