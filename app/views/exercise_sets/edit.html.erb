@@ -1,0 +1,5 @@
+<%= turbo_frame_tag edit_workout_exercise_exercise_set_path(@workout, @exercise, @exercise_set) do %>
+    <div class="p-4">
+        <%= render "form", workout: @workout, exercise: @exercise, exercise_set: @exercise_set %>
+    </div>
+<% end %>

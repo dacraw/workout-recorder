@@ -1,17 +1,25 @@
 <%= form_with(model: [workout, exercise, exercise_set]) do |f| %>
-    <div class="field">
-        <%= f.label :reps %><br />
-        <%= f.number_field :reps %>
-    </div>
-    <div class="field">
-        <%= f.label :weight %><br />
-        <%= f.number_field :weight %>
-    </div>
-    <div class="field">
-        <%= f.label :weight_unit %><br />
-        <%= f.select :weight_unit, ["lbs", "grams"] %>
-    </div>
-    <div>
-        <%= f.submit class: 'btn-primary' %>
+    <div class="flex items-end gap-x-2">
+        <div class="basis-0">
+            <%= f.label :reps, class: "font-bold" %><br />
+            <%= f.number_field :reps, class: "w-full h-8 py-0 px-1 " %>
+        </div>
+        <div class="basis-0">
+            <%= f.label :weight, class: "font-bold" %><br />
+            <%= f.number_field :weight, class: "w-full h-8 py-0 px-1" %>
+        </div>
+        <div class="">
+            <%= f.label :weight_unit, "Wt. Unit", class: "font-bold" %><br />
+            <%= f.select :weight_unit, ["lbs", "grams"], {}, class: "w-full h-8 py-0 px-1" %>
+        </div>
+        <div class="">
+            <%= f.button type: :submit, class: 'btn-primary w-full h-8 py-0 px-1 m-0' do %>
+                <% if exercise_set.new_record? %>
+                    Add Set
+                <% else %>
+                    Update Set
+                <% end %>
+            <% end %>
+        </div>
     </div>
 <% end %>
