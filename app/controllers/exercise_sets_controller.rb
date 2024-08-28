@@ -26,7 +26,7 @@ class ExerciseSetsController < ApplicationController
         @exercise_set.destroy
 
         respond_to do |format|
-            format.turbo_stream { render turbo_stream: turbo_stream.remove(workout_exercise_exercise_set_path(@workout, @exercise, @exercise_set))}
+            format.turbo_stream { render turbo_stream: turbo_stream.remove(@exercise_set)}
         end
     end
 
