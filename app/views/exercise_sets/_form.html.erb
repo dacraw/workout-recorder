@@ -10,14 +10,14 @@
         </div>
         <div class="">
             <%= f.label :weight_unit, "Wt. Unit", class: "font-bold" %><br />
-            <%= f.select :weight_unit, ["lbs", "grams"], {}, class: "w-full h-8 py-0 px-1" %>
+            <%= f.select :weight_unit, ["lbs", "g"], {}, class: "w-full h-8 py-0 px-1" %>
         </div>
         <div class="">
             <%= f.button type: :submit, class: 'btn-primary w-full h-8 py-0 px-1 m-0' do %>
                 <% if exercise_set.new_record? %>
                     Add Set
                 <% else %>
-                    Update Set
+                    Update
                 <% end %>
             <% end %>
         </div>

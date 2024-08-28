@@ -1,5 +1,6 @@
 <%= turbo_frame_tag edit_workout_exercise_exercise_set_path(@workout, @exercise, @exercise_set) do %>
-    <div class="p-4">
+    <div class="bg-gray-900 rounded-sm p-2">
         <%= render "form", workout: @workout, exercise: @exercise, exercise_set: @exercise_set %>
+        <%= link_to "Cancel", workout_exercise_exercise_sets_path(@workout, @exercise), class: "block mt-2" %>
     </div>
 <% end %>
