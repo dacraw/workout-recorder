@@ -1,8 +1,7 @@
 <div id="<%= dom_id exercise %>">
 
-  <%= turbo_frame_tag new_workout_exercise_exercise_set_path(workout, exercise), class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
+  <%= turbo_frame_tag new_workout_exercise_exercise_set_path(workout, exercise) do %>
     <%= render "exercise_sets/form", workout: workout, exercise: exercise, exercise_set: ExerciseSet.new %>
-    <%= render "application/loading_spinner" %>
   <% end %>
 
   <div class="my-4">

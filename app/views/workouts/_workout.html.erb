@@ -13,9 +13,10 @@
     <% end %>
 
     <% if current_user == workout.user && current_page?(my_workouts_path) %>
-        <%= turbo_frame_tag new_workout_exercise_path(workout) do %>
+        <%= turbo_frame_tag new_workout_exercise_path(workout), class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
             <%= render "exercises/form", workout: workout, exercise: Exercise.new %>
         <% end %>
+        <%= render "application/loading_spinner" %>
     <% end %>
     
     <%= render "workout_analysis", workout: workout if current_page?(my_workouts_path) %>
