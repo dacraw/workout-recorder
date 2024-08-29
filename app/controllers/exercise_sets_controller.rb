@@ -3,6 +3,8 @@ class ExerciseSetsController < ApplicationController
     before_action :set_exercise
     before_action :set_workout
     before_action :set_exercise_set, only: %i[destroy edit update]
+    before_action :check_author, except: [:index]
+    
     
     def index
         @exercise_sets = @exercise.exercise_sets
@@ -72,5 +74,11 @@ class ExerciseSetsController < ApplicationController
             flash[:alert] = "That exercise set doesn't exist."
             return redirect_to my_workouts_path
         end 
+    end
+
+    def check_author
+        @workout ||= Workout.find params[:workout_id]
+
+        redirect_to my_workouts_path if current_user != @workout.user
     end
 end
