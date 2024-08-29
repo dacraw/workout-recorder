@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(@exercise_set, "info") do %>
+    <div class="bg-gray-900 rounded-sm p-2">
+        <%= render "form", workout: @workout, exercise: @exercise, exercise_set: @exercise_set %>
+        <%= link_to workout_exercise_exercise_sets_path(@workout, @exercise), class: "block mt-4" do %>
+            <i class="fa-solid fa-ban text-red-800"></i>
+            Cancel
+        <% end %>
+    </div>
+<% end %>

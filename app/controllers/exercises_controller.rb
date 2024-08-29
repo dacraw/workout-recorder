@@ -4,6 +4,10 @@ class ExercisesController < ApplicationController
   before_action :set_workout
   before_action :check_author, except: [:index, :show]
 
+  def index
+    @exercises = @workout.exercises
+  end
+
   def new
     @exercise = Exercise.new
   end
@@ -17,7 +21,7 @@ class ExercisesController < ApplicationController
     
     respond_to do |format|
       if @exercise.save
-        format.turbo_stream { render turbo_stream: turbo_stream.prepend("exercises_workout_#{@workout.id}", partial: 'exercises/exercise', locals: {workout: @workout, exercise: @exercise}) }
+        format.turbo_stream
         format.html { redirect_to workout_url(@exercise.workout_id), notice: "Exercise was successfully created." }
         format.json { render :show, status: :created, location: @exercise }
       else
@@ -30,7 +34,7 @@ class ExercisesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@exercise, partial: "exercises/exercise", locals: { exercise: @exercise, workout: @workout}) }
+        format.turbo_stream
         format.html { redirect_to workout_exercise_url(@workout, @exercise), notice: "Exercise was successfully updated." }
         format.json { render :show, status: :ok, location: @exercise }
       else
@@ -44,7 +48,7 @@ class ExercisesController < ApplicationController
     @exercise.destroy!
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(@exercise)}
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(workout_exercise_path(@workout, @exercise))}
       format.html { redirect_to url_for(controller: 'workouts', action: 'my_workouts', params: {workout_id: @workout.id}), notice: "Exercise was successfully destroyed." }
       format.json { head :no_content }
     end

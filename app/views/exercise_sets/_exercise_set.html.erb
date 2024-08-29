@@ -1,0 +1,15 @@
+<div id="<%= dom_id exercise_set %>" class="mb-2">
+    <%= turbo_frame_tag dom_id(exercise_set, "info") do %>
+        <div class="flex gap-x-4">
+            <p>Set: <%= "#{exercise_set.reps} reps" if exercise_set.reps %><%= ", " if exercise_set.reps && exercise_set.weight %><%= "#{exercise_set.weight} #{exercise_set.weight_unit}" if exercise_set.weight %> <%=  %></p>
+
+            <%= link_to edit_workout_exercise_exercise_set_path(workout, exercise, exercise_set) do %>
+                <i class="fa-solid fa-pencil"></i>
+            <% end %>
+
+            <%= button_to workout_exercise_exercise_set_path(workout, exercise, exercise_set), method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+                <i class="fa-regular fa-trash-can"></i>
+            <% end %>
+        </div>
+    <% end %>
+</div>

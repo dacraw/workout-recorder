@@ -42,9 +42,4 @@ export default class extends Controller {
       .querySelectorAll(".exercises")
       .forEach((target) => target.classList.add("hidden"));
   }
-
-  disconnect() {
-    this.hideExercises();
-    this.removeActiveWorkout();
-  }
 }

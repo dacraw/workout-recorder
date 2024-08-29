@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend(dom_id @exercise, "exercise_sets") do %>
+    <%= render "exercise_sets/exercise_set", workout: @workout, exercise: @exercise, exercise_set: @exercise_set %>
+<% end %>
+
+<%= turbo_stream.update(dom_id(@exercise, "exercise_set_form")) do %>
+        <%= render "form", workout: @workout, exercise: @exercise, exercise_set: @exercise.exercise_sets.new %>
+<% end %>

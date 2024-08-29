@@ -1,5 +1,12 @@
 <div id="<%= dom_id exercise %>">
-  <p class="italic"><span> <%= exercise.date.strftime "%Y-%m-%d" %></p>
+
+  <%= turbo_frame_tag dom_id(exercise, "exercise_set_form") do %>
+    <%= render "exercise_sets/form", workout: workout, exercise: exercise, exercise_set: ExerciseSet.new %>
+  <% end %>
+
+  <div class="my-4">
+    <%= turbo_frame_tag dom_id(exercise, "exercise_sets"), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>
+  </div>
   <p>
     <span class="font-bold">Name:</span>
     <%= exercise.name %>

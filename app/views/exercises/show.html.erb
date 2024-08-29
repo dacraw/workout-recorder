@@ -1,10 +1,5 @@
-<h1 class="page-header">View Exercise</h1>
-
-<div class="mb-4">
-  <%= render 'exercise', workout: @workout, exercise: @exercise %>
-</div>
-
-<div class="inline-flex flex-col">
-  <%= render "workouts/workouts_index_link", workout: @workout %>
-  <%= render "workouts/my_workouts_link" %>
-</div>
+<%= turbo_frame_tag dom_id(@exercise) do %>
+  <div class="my-4">
+    <%= render 'exercise', workout: @workout, exercise: @exercise %>
+  </div>
+<% end %>

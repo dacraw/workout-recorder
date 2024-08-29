@@ -1,4 +1,4 @@
-<%= form_with(model: [workout, exercise]) do |form| %>
+<%= form_with(model: [workout, exercise], data: { controller: "form", action: "turbo:submit-end->form#clear"}) do |form| %>
   <% if exercise.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
@@ -11,23 +11,18 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
-  </div>  
-
-  <div>
+  <div class="mb-2">
     <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, placeholder: "e.g. Bicep Curls, Zumba, Swimming", class: "placeholder:text-sm w-full md:w-[unset]" %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.label :description, "Description (optional)", style: "display: block" %>
+    <%= form.text_field :description, placeholder: 'e.g. Ran for 2 miles', class: "placeholder:text-sm w-full md:w-[unset]" %>
   </div>
 
   <div>
-    <%= form.button type: :submit, class: "btn-primary" do %>
+    <%= form.button type: :submit, class: "btn-primary mt-2 w-full justify-center md:w-[unset]" do %>
       <% if exercise.new_record? %>
         <span>Create Exercise</span>
         <div>
