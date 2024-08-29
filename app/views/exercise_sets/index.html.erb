@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id @workout, "exercises" do %>
+<%= turbo_frame_tag dom_id(@exercise, "exercise_sets") do %>
     <% @exercise_sets.map do |exercise_set| %>
         <%= render "exercise_set", workout: @workout, exercise: @exercise, exercise_set: exercise_set %>
     <% end %>
