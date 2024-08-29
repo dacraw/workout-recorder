@@ -34,7 +34,7 @@ class ExercisesController < ApplicationController
   def update
     respond_to do |format|
       if @exercise.update(exercise_params)
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@exercise, partial: "exercises/exercise", locals: { exercise: @exercise, workout: @workout}) }
+        format.turbo_stream
         format.html { redirect_to workout_exercise_url(@workout, @exercise), notice: "Exercise was successfully updated." }
         format.json { render :show, status: :ok, location: @exercise }
       else

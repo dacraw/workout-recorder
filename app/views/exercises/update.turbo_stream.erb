@@ -1,0 +1,7 @@
+<%= turbo_stream.replace(@exercise) do %>
+    <%= render "exercises/exercise", exercise: @exercise, workout: @workout %>
+<% end %>
+
+<%= turbo_stream.update(dom_id @exercise, "info_link") do %>
+    <%= @exercise.name %>
+<% end %>
