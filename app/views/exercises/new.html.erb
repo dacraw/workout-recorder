@@ -1,4 +1,6 @@
-<%= render "modal_form", title: "New Exercise" %>
+<%= turbo_frame_tag new_workout_exercise_path(@workout) do %>
+  <%= render "form", workout: @workout, exercise: @exercise %>
+<% end %>
 
 <br />
 

@@ -13,10 +13,9 @@
     <% end %>
 
     <% if current_user == workout.user && current_page?(my_workouts_path) %>
-        <!--- You want to render this new exercise form on this page 
-            then you want to populate the exercise set form after the exercise is created
-        -->
-        <%= render "exercises/form", workout: workout, exercise: Exercise.new %>
+        <%= turbo_frame_tag new_workout_exercise_path(workout) do %>
+            <%= render "exercises/form", workout: workout, exercise: Exercise.new %>
+        <% end %>
     <% end %>
     
     <%= render "workout_analysis", workout: workout if current_page?(my_workouts_path) %>

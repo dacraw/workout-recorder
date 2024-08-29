@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend(workout_exercises_path(@workout)) do %>
+    <%= render "exercises/exercise_info_link", workout: @workout, exercise: @exercise %>
+<% end %>
+
+<%= turbo_stream.update(new_workout_exercise_path(@workout)) do %>
+    <%= render "form", workout: @workout, exercise: Exercise.new %>
+<% end %>
