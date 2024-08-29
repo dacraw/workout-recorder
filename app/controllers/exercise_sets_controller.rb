@@ -30,10 +30,6 @@ class ExerciseSetsController < ApplicationController
         end
     end
 
-    def edit
-
-    end
-
     def update
         respond_to do |format|
             if @exercise_set.update(exercise_set_params)
@@ -53,17 +49,27 @@ class ExerciseSetsController < ApplicationController
     def set_exercise
         @exercise = Exercise.find_by_id(params[:exercise_id])
 
-        # add handler for blank exercise (redirect to new path)
+        if @exercise.blank?
+            flash[:alert] = "That exercise doesn't exist."
+            return redirect_to my_workouts_path
+        end 
     end
 
     def set_workout
         @workout = Workout.find_by_id(params[:workout_id])
 
-        # add handler for blank exercise (redirect to new path)
+        if @workout.blank?
+            flash[:alert] = "That workout doesn't exist."
+            return redirect_to my_workouts_path
+        end 
     end
 
     def set_exercise_set
-        @exercise_set = ExerciseSet.find(params[:id])
-    end
+        @exercise_set = ExerciseSet.find_by_id(params[:id])
 
+        if @exercise_set.blank?
+            flash[:alert] = "That exercise set doesn't exist."
+            return redirect_to my_workouts_path
+        end 
+    end
 end
