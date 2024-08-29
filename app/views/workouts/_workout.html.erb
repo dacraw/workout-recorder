@@ -22,6 +22,8 @@
     <%= render "workout_analysis", workout: workout if current_page?(my_workouts_path) %>
 
     <div class="p-2">
-        <%= turbo_frame_tag workout_exercises_path(workout), src: workout_exercises_path(workout), loading: "lazy" %>    
+        <%= turbo_frame_tag workout_exercises_path(workout), src: workout_exercises_path(workout), loading: "lazy" do %>
+            <%= render "application/loading_spinner", show: true %>
+        <% end %>    
     </div>
 </div>
