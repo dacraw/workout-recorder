@@ -13,7 +13,7 @@
     <% end %>
 
     <% if current_user == workout.user && current_page?(my_workouts_path) %>
-        <%= turbo_frame_tag new_workout_exercise_path(workout), class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
+        <%= turbo_frame_tag dom_id(workout, "exercise_form"), class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
             <%= render "exercises/form", workout: workout, exercise: Exercise.new %>
         <% end %>
         <%= render "application/loading_spinner" %>
@@ -22,7 +22,7 @@
     <%= render "workout_analysis", workout: workout if current_page?(my_workouts_path) %>
 
     <div class="p-2">
-        <%= turbo_frame_tag workout_exercises_path(workout), src: workout_exercises_path(workout), loading: "lazy" do %>
+        <%= turbo_frame_tag dom_id(workout, "exercises"), src: workout_exercises_path(workout), loading: "lazy" do %>
             <%= render "application/loading_spinner", show: true %>
         <% end %>    
     </div>

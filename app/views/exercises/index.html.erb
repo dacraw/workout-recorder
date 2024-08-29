@@ -1,5 +1,5 @@
 <div>
-  <%= turbo_frame_tag workout_exercises_path(@workout) do %>
+  <%= turbo_frame_tag dom_id(@workout, "exercises") do %>
       <% @exercises.order(created_at: :desc).each do |exercise| %>
         <%= render "exercise_info_link", workout: @workout, exercise: exercise %>
       <% end %>
