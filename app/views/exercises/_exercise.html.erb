@@ -5,7 +5,7 @@
   <% end %>
 
   <div class="my-4">
-    <%= turbo_frame_tag workout_exercise_exercise_sets_path(workout, exercise), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>
+    <%= turbo_frame_tag dom_id(@workout, "exercises"), src: workout_exercise_exercise_sets_path(workout, exercise), loading: "lazy" %>
   </div>
   <p>
     <span class="font-bold">Name:</span>
