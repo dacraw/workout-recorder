@@ -1,4 +1,5 @@
 class ExerciseSetsController < ApplicationController
+    before_action :authenticate_user!, except: %i[index]
     before_action :set_exercise
     before_action :set_workout
     before_action :set_exercise_set, only: %i[destroy edit update]

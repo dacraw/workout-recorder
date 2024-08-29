@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
 
     resources :exercises do
-      resources :exercise_sets, only: [:index, :new, :create, :destroy, :edit, :update]
+      resources :exercise_sets, except: [:show]
     end
   end
   get "my_workouts", to: "workouts#my_workouts"
