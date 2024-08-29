@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend(workout_exercise_exercise_sets_path(@workout, @exercise)) do %>
+    <%= render "exercise_sets/exercise_set", workout: @workout, exercise: @exercise, exercise_set: @exercise_set, status: :create %>
+<% end %>
+
+<%= turbo_stream.update(new_workout_exercise_exercise_set_path(@workout, @exercise, @exercise.exercise_sets.new)) do %>
+        <%= render "form", workout: @workout, exercise: @exercise, exercise_set: @exercise.exercise_sets.new %>
+<% end %>

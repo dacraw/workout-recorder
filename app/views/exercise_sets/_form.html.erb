@@ -1,4 +1,4 @@
-<%= form_with(model: [workout, exercise, exercise_set]) do |f| %>
+<%= form_with model: [workout, exercise, exercise_set], data: { controller: :form, action: "turbo:submit-end->form#clear" } do |f| %>
   <% if exercise_set.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(exercise_set.errors.count, "error") %> prohibited this exercise set from being saved:</h2>

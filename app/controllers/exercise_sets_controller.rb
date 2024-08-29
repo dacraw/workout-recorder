@@ -9,10 +9,9 @@ class ExerciseSetsController < ApplicationController
     
     def create
         @exercise_set = @exercise.exercise_sets.new(exercise_set_params)
-
         respond_to do |format|
             if @exercise_set.save
-                format.turbo_stream { render turbo_stream: turbo_stream.prepend(workout_exercise_exercise_sets_path(@workout, @exercise), partial: "exercise_sets/exercise_set", locals: { workout: @workout, exercise: @exercise, exercise_set: @exercise_set }) }
+                format.turbo_stream
             else
                 format.html { render :new, status: :unprocessable_entity }
             end
@@ -20,7 +19,7 @@ class ExerciseSetsController < ApplicationController
     end
 
     def new
-
+        @exercise_set = @exercise.exercise_sets.new
     end
 
     def destroy
