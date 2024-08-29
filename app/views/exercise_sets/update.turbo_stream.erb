@@ -1,0 +1,3 @@
+<%= turbo_stream.replace(@exercise_set) do %>
+    <%= render "exercise_sets/exercise_set", workout: @workout, exercise: @exercise, exercise_set: @exercise_set %>
+<% end %>

@@ -1,5 +1,5 @@
 <div id="<%= dom_id exercise_set %>" class="mb-2">
-    <%= turbo_frame_tag workout_exercise_exercise_set_path(workout, exercise, exercise_set) do %>
+    <%= turbo_frame_tag dom_id(exercise_set, "info") do %>
         <div class="flex gap-x-4">
             <p>Set: <%= "#{exercise_set.reps} reps" if exercise_set.reps %><%= ", " if exercise_set.reps && exercise_set.weight %><%= "#{exercise_set.weight} #{exercise_set.weight_unit}" if exercise_set.weight %> <%=  %></p>
 
