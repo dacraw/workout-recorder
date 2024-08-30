@@ -46,6 +46,34 @@ module GeminiAssistant
         end
     end
 
+    def evaluate_exercise(exercise)
+        bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
+
+        sets = exercise.exercise_sets
+        exercise_set_string = ""
+        exercise.exercise_sets.each do |set| 
+            exercise_set_string += set.reps.to_s + " reps" if set.reps
+            exercise_set_string += "," if set.reps && set.weight
+            exercise_set_string += set.weight.to_s if set.weight
+            exercise_set_string += set.weight_unit if set.weight
+            exercise_set_string += "; "
+        end
+        exercise_set_string
+
+        prompt = <<-HEREDOC
+            Provide a one sentence analysis and one sentence improvement for the following exercise:    
+            
+            Exercise Name: #{exercise.name}
+            Exercise Description (optional): #{exercise.description}
+            Number of Reps AND OR Weight during exercise: #{exercise_set_string}
+
+            If you cannot provide an analysis with the given information, please respond with "I'm sorry, but I cannot provide a meaningful analysis with the exercise information provided." Please maintain an professional and enthusiastic tone. Please keep the response three sentences long.
+
+        HEREDOC
+
+        bot.eval(prompt)
+    end
+
     def suggest_exercise_based_on_type(type, existing_exercise_info)
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
