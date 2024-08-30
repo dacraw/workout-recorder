@@ -1,3 +1,5 @@
+include GeminiAssistant
+
 class ExercisesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_exercise, only: %i[ show edit update destroy ]
@@ -10,9 +12,6 @@ class ExercisesController < ApplicationController
 
   def new
     @exercise = Exercise.new
-  end
-
-  def edit
   end
 
   def create
@@ -54,8 +53,23 @@ class ExercisesController < ApplicationController
     end
   end
 
+  def evaluate_exercise
+    @exercise = Exercise.find(params[:exercise_id])
+    
+    response = GeminiAssistant.evaluate_exercise @exercise
+
+    @exercise.gemini_response = response
+
+    respond_to do |format|
+      if @exercise.save
+        format.turbo_stream 
+      else
+        format.html { render plain: "Couldn't save the exercise"}
+      end
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_exercise
       @exercise = Exercise.find(params[:id])
     end
@@ -64,7 +78,6 @@ class ExercisesController < ApplicationController
       @workout = Workout.find params[:workout_id]
     end
 
-    # Only allow a list of trusted parameters through.
     def exercise_params
       params.require(:exercise).permit(:name, :description, :date)
     end
