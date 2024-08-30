@@ -31,10 +31,4 @@ class Exercise < ApplicationRecord
 
         gemini_response_html
     end
-    
-    private
-
-    def set_gemini_response
-        self.gemini_response = evaluate_exercise self
-    end
 end
