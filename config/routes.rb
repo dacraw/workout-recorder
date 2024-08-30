@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
 
     resources :exercises do
+      get "evaluate_exercise", to: "exercises#evaluate_exercise"
       resources :exercise_sets, except: [:show]
     end
   end

@@ -18,12 +18,14 @@
     <%= exercise.description %>
   </p>
 
+  <%= link_to "Evaluate Exercise", workout_exercise_evaluate_exercise_path(workout, exercise), data: { turbo_stream: true}, class: "btn-primary" %>
   <div>
-    <% if exercise.gemini_response.present? %>
-      <%= sanitize exercise.gemini_response_html %>
-    <% else %>
-      <%= sanitize exercise.get_and_set_gemini_response_html %>
-    <% end %>
+
+    <div id="<%= dom_id(exercise, "evaluation") %>">
+        <% if exercise.gemini_response.present? %>
+          <%= sanitize exercise.gemini_response_html %>
+        <% end %>
+    </div>
   </div>
 
   <div class="mb-4 mt-2">
