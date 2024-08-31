@@ -1,4 +1,5 @@
 FactoryBot.define do
-  factory :workout do
+  factory :user do
+    
   end
 end
