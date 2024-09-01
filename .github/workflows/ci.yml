@@ -29,8 +29,10 @@ jobs:
       # Add or replace dependency steps here
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1 # from https://github.com/ruby/setup-ruby
-        # with:
-        #   bundler-cache: true
+        with:
+          bundler-cache: true
+      - name: print Gemfile.lock
+          run: echo ./Gemfile.lock
       # Add or replace database setup steps here
       - name: Set up database schema
         run: ./bin/rails db:prepare
