@@ -35,7 +35,7 @@ jobs:
         run: bundle show error_highlight
       # Add or replace database setup steps here
       - name: Set up database schema
-        run: ./bin/rails bundle exec db:prepare
+        run: bundle exec rails db:prepare
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec
