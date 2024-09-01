@@ -31,8 +31,8 @@ jobs:
         uses: ruby/setup-ruby@v1 # from https://github.com/ruby/setup-ruby
         with:
           bundler-cache: true
-      - name: print Gemfile.lock
-        run: cat ./Gemfile.lock
+      - name: print error_highlight version
+        run: bundle show error_highlight
       # Add or replace database setup steps here
       - name: Set up database schema
         run: ./bin/rails bundle exec db:prepare
