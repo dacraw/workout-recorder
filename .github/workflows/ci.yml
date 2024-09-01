@@ -32,8 +32,8 @@ jobs:
         with:
           bundler-cache: true
       # Add or replace database setup steps here
-      - name: show bundler version
-        run: bundler --version
+      - name: run bundler
+        run: bundle install
       - name: Set up database schema
         run: bin/rails db:schema:load
       # Add or replace test runners here
