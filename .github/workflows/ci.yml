@@ -9,9 +9,9 @@
 name: "Ruby on Rails CI"
 on: [push]
 jobs:
-  docker:
-    - image: cimg/ruby:3.1.4
   test:
+    docker:
+      - image: cimg/ruby:3.1.4
     runs-on: ubuntu-latest
     services:
       postgres:
