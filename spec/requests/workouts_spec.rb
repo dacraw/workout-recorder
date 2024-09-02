@@ -51,4 +51,25 @@ RSpec.describe "Workouts", type: :request do
       expect(response.body).to include("exercises_workout_" + workout.id.to_s) # turbo frame id
     end
   end
+
+  describe "DELETE /destroy" do
+    let(:user) { create(:user) }
+    let!(:workout) { create(:workout, user: user) }
+
+    before :each do
+      sign_in user
+    end
+    
+    it "destroys an existing workout" do
+      expect { delete workout_path(workout) }
+      .to change { Workout.count }.from(1).to(0)
+    end
+
+    it "redirects to My Workouts page" do
+      delete workout_path(workout)
+
+      expect(response.status).to eq 302
+      expect(response).to redirect_to my_workouts_path
+    end
+  end
 end
