@@ -99,4 +99,24 @@ RSpec.describe "Workouts", type: :request do
       expect(response).to redirect_to my_workouts_path
     end
   end
+
+  describe "GET /evaluate_workout" do
+    let(:user) { create :user }
+    let!(:workout) { create :workout, user: user}
+
+    before :each do
+      sign_in user
+    end
+    
+    it "updates a workout's gemini_response to the result provided by the Gemini Assistant" do
+      text_stub = "Workout #{workout.id} evaluated!"
+      allow(GeminiAssistant).to receive(:evaluate_workout) { text_stub }
+
+      get evaluate_workout_workout_path(workout)
+
+      expect(response.body).to include text_stub
+      workout.reload
+      expect(workout.gemini_response).to eq text_stub
+    end
+  end
 end
