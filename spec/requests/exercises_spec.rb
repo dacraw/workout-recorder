@@ -59,4 +59,38 @@ RSpec.describe "Exercises", type: :request do
       end
     end
   end 
+
+  describe "PATCH /update" do
+    let(:exercise) { create :exercise }
+
+    context "authorized" do
+
+      before :each do
+        sign_in exercise.user
+      end
+
+      context "turbo stream" do
+        it "updates an exercise" do
+          exercise_name = "Pullups"
+
+          patch workout_exercise_path(exercise.workout, exercise), params: { exercise: { name: exercise_name } }, as: :turbo_stream
+
+          expect(exercise.reload.name).to eq exercise_name
+        end
+        it "renders proper template" do
+          exercise_name = "Dips"
+          
+          patch workout_exercise_path(exercise.workout, exercise), params: { exercise: { name: exercise_name }}, as: :turbo_stream
+
+          expect(response).to render_template :update
+
+          expect(response.body).to include "<turbo-stream action=\"replace\" target=\"exercise_#{exercise.id}\">"
+
+          expect(response.body).to include "<turbo-stream action=\"update\" target=\"info_link_exercise_#{exercise.id}\">"
+
+          expect(response.body).to include exercise_name
+        end
+      end
+    end
+  end
 end
