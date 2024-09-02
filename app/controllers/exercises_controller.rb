@@ -17,7 +17,7 @@ class ExercisesController < ApplicationController
   def create
     @exercise = Exercise.new(exercise_params)
     @exercise.workout_id = params[:workout_id]
-    
+
     respond_to do |format|
       if @exercise.save
         format.turbo_stream
