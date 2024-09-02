@@ -119,4 +119,24 @@ RSpec.describe "Workouts", type: :request do
       expect(workout.gemini_response).to eq text_stub
     end
   end
+
+  describe "GET /suggest_exercise_based_on_type" do
+    let(:user) { create :user }
+    let(:workout) { create :workout, user: user }
+
+    before :each do
+      sign_in user
+    end
+    
+    it "renders html for the suggested workout" do
+      suggested_stub_text = "This is the suggested exercise based on provided types: **Jumping Jacks.**"
+      allow(GeminiAssistant).to receive(:suggest_exercise_based_on_type) { suggested_stub_text }
+
+      exercise_prompt = "Abs, Chest, Back"
+      get suggest_exercise_based_on_type_workout_path(workout, params: { exercise_prompt: exercise_prompt })
+
+      expect(response.body).to include "<p>This is the suggested exercise based on provided types: <strong>Jumping Jacks.</strong></p>"
+      expect(response.body).to include exercise_prompt
+    end
+  end
 end
