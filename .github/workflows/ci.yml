@@ -33,7 +33,7 @@ jobs:
       - name: Set up database schema
         run: bundle exec rails db:prepare
       - name: Precompile assets
-        run: bundle exec rails assets:precompile
+        run: bundle exec rails assets:precompile # TODO: cache this
       - name: Run tests
         run: bundle exec rspec
 
