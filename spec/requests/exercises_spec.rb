@@ -40,6 +40,13 @@ RSpec.describe "Exercises", type: :request do
         sign_in exercise.user
       end
 
+      it "requires the current user to be the workout creator" do
+        other_exercise = create :exercise
+        get workout_exercise_evaluate_exercise_path(other_exercise.workout, other_exercise), as: :turbo_stream
+
+        expect(response).to redirect_to my_workouts_path
+      end
+
       context "turbo stream" do
         before :each do
           expect(GeminiAssistant).to receive(:evaluate_exercise).with(exercise) { stub_text }
@@ -98,6 +105,13 @@ RSpec.describe "Exercises", type: :request do
         sign_in exercise.user
       end
 
+      it "requires the current user to be the workout creator" do
+        other_exercise = create :exercise
+        patch workout_exercise_path(other_exercise.workout, other_exercise), as: :turbo_stream
+
+        expect(response).to redirect_to my_workouts_path
+      end
+
       context "turbo stream" do
         it "updates an exercise" do
           exercise_name = "Pullups"
@@ -129,6 +143,13 @@ RSpec.describe "Exercises", type: :request do
     context "authenticated" do
       before :each do
         sign_in exercise.user
+      end
+
+      it "requires the current user to be the workout creator" do
+        other_exercise = create :exercise
+        delete workout_exercise_path(other_exercise.workout, other_exercise), as: :turbo_stream
+
+        expect(response).to redirect_to my_workouts_path
       end
 
       it "destroys an exercise" do
