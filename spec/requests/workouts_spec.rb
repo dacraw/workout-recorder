@@ -126,6 +126,15 @@ RSpec.describe "Workouts", type: :request do
         expect(response.status).to eq 302
         expect(response).to redirect_to my_workouts_path
       end
+
+      it "requires the current user to be the creator" do
+        different_workout = create :workout
+
+        delete workout_path(different_workout)
+
+        expect(response.status).to eq 302
+        expect(response).to redirect_to my_workouts_path
+      end
     end
 
     context "unauthenticated" do
@@ -157,6 +166,15 @@ RSpec.describe "Workouts", type: :request do
         workout.reload
         expect(workout.gemini_response).to eq text_stub
       end
+
+      it "requires the current user to be the workout creator" do
+        different_workout = create :workout
+
+        get evaluate_workout_workout_path(different_workout)
+
+        expect(response.status).to eq 302
+        expect(response).to redirect_to my_workouts_path
+      end      
     end
 
     context "unauthenticated" do
@@ -188,6 +206,15 @@ RSpec.describe "Workouts", type: :request do
         expect(response.body).to include "<p>This is the suggested exercise based on provided types: <strong>Jumping Jacks.</strong></p>"
         expect(response.body).to include exercise_prompt
       end
+
+      it "requires the current user to be the workout creator" do
+        different_workout = create :workout
+
+        get suggest_exercise_based_on_type_workout_path(different_workout)
+
+        expect(response.status).to eq 302
+        expect(response).to redirect_to my_workouts_path
+      end        
     end
 
     context "unauthenticated" do
