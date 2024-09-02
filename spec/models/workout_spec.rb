@@ -8,7 +8,7 @@ RSpec.describe Workout, type: :model do
   end
   
   it "requires a user" do
-    workout = build(:workout)
+    workout = build(:workout, user: nil)
 
     expect(workout.save).to eq false
   end

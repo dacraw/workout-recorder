@@ -36,4 +36,19 @@ RSpec.describe "Workouts", type: :request do
       expect(response.body).to include '<h1 class="page-header">My Workouts</h1>'
     end
   end
+
+  describe "GET /show" do
+    let(:user) { create :user }
+    let(:workout) { create(:workout, :with_exercises, user: user) }
+
+    before :each do
+      sign_in user
+    end
+    
+    it "renders the show page for the workout" do
+      get workout_path(workout)
+      expect(response).to render_template :show
+      expect(response.body).to include("exercises_workout_" + workout.id.to_s) # turbo frame id
+    end
+  end
 end
