@@ -6,7 +6,7 @@
 #
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
-name: "Ruby on Rails CI"
+name: "RSpec"
 on: [push]
 jobs:
   test:
@@ -26,20 +26,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      # Add or replace dependency steps here
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1 # from https://github.com/ruby/setup-ruby
         with:
           bundler-cache: true
-      - name: print error_highlight version
-        run: bundle show error_highlight
-      # Add or replace database setup steps here
       - name: Set up database schema
         run: bundle exec rails db:prepare
-      # precompile assets
       - name: Precompile assets
         run: bundle exec rails assets:precompile
-      # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec
 
