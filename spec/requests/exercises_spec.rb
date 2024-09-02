@@ -31,6 +31,36 @@ RSpec.describe "Exercises", type: :request do
     end
   end
 
+  describe "GET /evaluate_exercise" do
+    let(:exercise) { create :exercise }
+    let(:stub_text) { "This workout is fantastic!" }
+    
+    context "authenticated" do
+      before :each do
+        sign_in exercise.user
+      end
+
+      context "turbo stream" do
+        before :each do
+          expect(GeminiAssistant).to receive(:evaluate_exercise).with(exercise) { stub_text }
+        end
+
+        it "updates the exercise's gemini_response to the value returned by GeminiAssistant" do
+          get workout_exercise_evaluate_exercise_path(exercise.workout, exercise), as: :turbo_stream
+          
+          expect(exercise.reload.gemini_response).to eq stub_text
+        end
+
+        it "renders the correct turbo stream template" do
+          get workout_exercise_evaluate_exercise_path(exercise.workout, exercise), as: :turbo_stream
+
+          expect(response.body).to include "<turbo-stream action=\"replace\" target=\"evaluation_exercise_#{exercise.id}\">"
+          expect(response.body).to include stub_text
+        end
+      end
+    end
+  end
+
   describe "POST /create" do
     let(:workout) { create :workout, user: user }
 
@@ -63,8 +93,7 @@ RSpec.describe "Exercises", type: :request do
   describe "PATCH /update" do
     let(:exercise) { create :exercise }
 
-    context "authorized" do
-
+    context "authenticated" do
       before :each do
         sign_in exercise.user
       end
@@ -97,7 +126,7 @@ RSpec.describe "Exercises", type: :request do
   describe "DELETE /destroy" do
     let!(:exercise) { create :exercise }
 
-    context "authorized" do
+    context "authenticated" do
       before :each do
         sign_in exercise.user
       end
