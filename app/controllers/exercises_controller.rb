@@ -47,7 +47,7 @@ class ExercisesController < ApplicationController
     @exercise.destroy!
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(workout_exercise_path(@workout, @exercise))}
+      format.turbo_stream
       format.html { redirect_to url_for(controller: 'workouts', action: 'my_workouts', params: {workout_id: @workout.id}), notice: "Exercise was successfully destroyed." }
       format.json { head :no_content }
     end

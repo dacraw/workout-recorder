@@ -93,4 +93,29 @@ RSpec.describe "Exercises", type: :request do
       end
     end
   end
+
+  describe "DELETE /destroy" do
+    let!(:exercise) { create :exercise }
+
+    context "authorized" do
+      before :each do
+        sign_in exercise.user
+      end
+
+      it "destroys an exercise" do
+        expect { 
+          delete workout_exercise_path(exercise.workout, exercise), as: :turbo_stream
+        }.to change {
+          Exercise.count
+        }.from(1).to(0)
+      end
+
+      it "renders the proper template" do
+        delete workout_exercise_path(exercise.workout, exercise), as: :turbo_stream
+
+        expect(response).to render_template :destroy
+        expect(response.body).to include "<turbo-stream action=\"remove\" target=\"#{workout_exercise_path(exercise.workout, exercise)}\">"
+      end
+    end
+  end
 end
