@@ -14,6 +14,33 @@ RSpec.describe "Workouts", type: :request do
     end
   end
 
+  describe "GET /my_workouts" do
+    let(:user) { create :user }
+    let!(:workouts) { 
+      workouts = []
+
+      3.times do |i|
+        workouts.push(create :workout, date: i.days.from_now, user: user)
+      end
+
+      workouts
+    }
+
+    before :each do 
+      sign_in user
+    end
+    
+    it "renders the current user's workouts" do
+      get my_workouts_path
+
+      workout_dates = workouts.pluck(:date).map {|date| date.strftime "%Y-%m-%d"}
+
+      workout_dates.each do |date|
+        expect(response.body).to include "<span>#{date}</span>"
+      end
+    end
+  end
+
   describe "POST /create" do
     let(:user) { create :user }
 
