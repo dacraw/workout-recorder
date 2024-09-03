@@ -11,7 +11,7 @@
 name: "RSpec"
 on:
   push:
-    branches-ignore: [$default-branch]
+    branches-ignore: [main]
 jobs:
   test:
     runs-on: ubuntu-latest
