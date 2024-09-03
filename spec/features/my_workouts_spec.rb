@@ -120,5 +120,30 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
       click_button exercises.first.name
       expect(page).to have_content exercises.first.description
     end
+
+    it "evaluates the exercise" do
+      workout = create :workout, user: user
+      exercise = create :exercise, :with_a_description, workout: workout
+
+      workout_date_formatted = workout.date.strftime("%Y-%m-%d")
+      evaluation_stub = "This workout targets the body and can be improved by trying harder."
+
+      expect {
+        expect(GeminiAssistant).to receive(:evaluate_exercise).with(exercise) { evaluation_stub }
+  
+        visit my_workouts_path
+  
+        expect(page).to have_button workout_date_formatted
+        click_button workout_date_formatted
+  
+        expect(page).to have_button exercise.name
+        click_button exercise.name
+  
+        expect(page).to have_link "Evaluate Exercise" 
+        click_link "Evaluate Exercise"
+  
+        expect(page).to have_content evaluation_stub
+      }.to change { exercise.reload.gemini_response }.from(nil).to(evaluation_stub)
+    end
   end
 end
