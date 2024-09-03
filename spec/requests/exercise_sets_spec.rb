@@ -83,4 +83,45 @@ RSpec.describe "ExerciseSets", type: :request do
       end
     end
   end
+
+  describe "PATCH /update" do
+    let(:exercise_set) { create :exercise_set, reps: 8 }
+    
+    context "authenticated" do
+      before :each do
+        sign_in exercise_set.user
+      end
+
+      it "requires the current user to be the workout creator" do
+        other_exercise_set = create :exercise_set, reps: 10
+
+        expect {
+          patch workout_exercise_exercise_set_path(other_exercise_set.workout, other_exercise_set.exercise, other_exercise_set), params: { exercise_set: { reps: 12 } }
+
+          expect(response).to redirect_to my_workouts_path
+        }.not_to change { other_exercise_set.reload.reps }
+      end
+
+      it "updates an existing exercise set" do
+        expect {
+          patch workout_exercise_exercise_set_path(exercise_set.workout, exercise_set.exercise, exercise_set), params: { exercise_set: { reps: 10 }}, as: :turbo_stream
+        }.to change { exercise_set.reload.reps }.from(8).to(10)
+      end
+
+      it "renders the appropriate template" do
+        patch workout_exercise_exercise_set_path(exercise_set.workout, exercise_set.exercise, exercise_set), params: { exercise_set: { reps: exercise_set.reps } }, as: :turbo_stream
+
+        expect(response).to render_template :update
+        expect(response.body).to include "<turbo-stream action=\"replace\" target=\"exercise_set_#{exercise_set.id}\">"
+      end
+    end
+
+    context "unauthenticated" do
+      it "redirects to the the signin page" do
+        patch workout_exercise_exercise_set_path(exercise_set.workout, exercise_set.exercise, exercise_set), params: { exercise_set: { reps: 10 }}, as: :turbo_stream
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end
