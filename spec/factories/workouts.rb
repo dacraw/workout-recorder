@@ -3,8 +3,12 @@ FactoryBot.define do
     user
 
     trait :with_exercises do
-      after :create do |workout|
-        workout.exercises = create_list(:exercise, 2, workout: workout)
+      transient do
+        exercise_traits { [] }
+      end
+
+      after :create do |workout, evaluator|
+        workout.exercises = create_list(:exercise, 2, *evaluator.exercise_traits, workout: workout)
         workout.save
       end
     end

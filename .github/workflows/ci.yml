@@ -39,7 +39,7 @@ jobs:
       - name: Precompile assets
         run: bundle exec rails assets:precompile # TODO: cache this
       - name: Run tests
-        run: bundle exec rspec
+        run: HEADLESS=true bundle exec rspec
 
   # lint:
   #   runs-on: ubuntu-latest
