@@ -67,5 +67,36 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
       expect(page).not_to have_content suggested_exercise_stub
       expect(page).not_to have_content "Selected Muscle Groups: #{muscle_groups.join(',')}"
     end
+
+    it "allows a user to create a new exercise for an existing workout" do
+      exercise_description = "Child's pose, downward dog, bicycle crunches"
+      exercise_name = "Yoga"
+      workout = create :workout, user: user
+      workout_date_formatted = workout.date.strftime("%Y-%m-%d")
+
+      expect {
+        visit my_workouts_path
+  
+        expect(page).to have_content "My Workouts"
+        expect(page).to have_button workout_date_formatted     
+        click_button workout_date_formatted
+        
+        expect(page).to have_button "Create Exercise"
+        
+        within("form[action=\"#{workout_exercises_path(workout)}\"]") do
+          fill_in "exercise[name]", with: exercise_name
+          fill_in "exercise[description]", with: exercise_description
+        end
+  
+        click_button "Create Exercise"
+
+        expect(page).to have_button exercise_name
+      }.to change { Exercise.count }.from(0).to(1)
+
+      exercise = Exercise.last
+      expect(exercise.name).to eq exercise_name
+      expect(exercise.description).to eq exercise_description
+      expect(exercise.user).to eq user
+    end
   end
 end
