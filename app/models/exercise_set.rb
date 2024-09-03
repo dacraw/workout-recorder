@@ -1,9 +1,11 @@
 class ExerciseSet < ApplicationRecord
     belongs_to :exercise
     has_one :workout, through: :exercise
+    has_one :user, through: :exercise
 
     validates_presence_of :exercise
     validate :validate_presence_of_reps_or_weight
+
 
     private
 
