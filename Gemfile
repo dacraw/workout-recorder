@@ -70,7 +70,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  # This gem is commented out because it causaes a version mismatch issue in Github action 
+  # This gem is commented out because it causes a version mismatch issue in Github action 
   # https://github.com/dacraw/workout-recorder/actions/runs/10657968083/job/29538396794
   # Ideally, this gem should be included and the Github action issue resolved independently
   # gem "error_highlight", "~> 0.6.0", platforms: [:ruby]
