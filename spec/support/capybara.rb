@@ -18,7 +18,7 @@ Capybara.register_driver :headless_chrome do |app|
     Capybara::Selenium::Driver.new app, browser: :chrome, options: options
   end
 
-if ENV['CI']
+if ENV['HEADLESS']
     Capybara.javascript_driver = :headless_chrome
 else
     Capybara.javascript_driver = :selenium_chrome
