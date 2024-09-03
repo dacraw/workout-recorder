@@ -78,6 +78,8 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
         visit my_workouts_path
   
         expect(page).to have_content "My Workouts"
+
+        # Expand the workout
         expect(page).to have_button workout_date_formatted     
         click_button workout_date_formatted
         
