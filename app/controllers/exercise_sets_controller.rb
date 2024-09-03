@@ -12,6 +12,7 @@ class ExerciseSetsController < ApplicationController
     
     def create
         @exercise_set = @exercise.exercise_sets.new(exercise_set_params)
+        
         respond_to do |format|
             if @exercise_set.save
                 format.turbo_stream

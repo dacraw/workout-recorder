@@ -2,9 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Workout, type: :model do
   let(:workout) { build(:workout, user: build(:user))}
+
+  it "successfully saves" do
+    expect(workout.save).to be_truthy
+  end
   
   it "requires a user" do
-    workout = build(:workout)
+    workout = build(:workout, user: nil)
 
     expect(workout.save).to eq false
   end

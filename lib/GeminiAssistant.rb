@@ -1,5 +1,5 @@
 module GeminiAssistant
-    def evaluate_workout(workout_id)
+    def self.evaluate_workout(workout_id)
         begin
             bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
@@ -23,7 +23,7 @@ module GeminiAssistant
         end
     end
 
-    def evaluate_exercise_name_and_description(name, description)
+    def self.evaluate_exercise_name_and_description(name, description)
         if !name || ! description
             puts "Missing name and/or description"
             return
@@ -46,7 +46,7 @@ module GeminiAssistant
         end
     end
 
-    def evaluate_exercise(exercise)
+    def self.evaluate_exercise(exercise)
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
         sets = exercise.exercise_sets
@@ -76,7 +76,7 @@ module GeminiAssistant
         bot.eval(prompt)
     end
 
-    def suggest_exercise_based_on_type(type, existing_exercise_info)
+    def self.suggest_exercise_based_on_type(type, existing_exercise_info)
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
         begin

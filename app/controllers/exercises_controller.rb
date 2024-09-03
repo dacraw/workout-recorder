@@ -17,7 +17,7 @@ class ExercisesController < ApplicationController
   def create
     @exercise = Exercise.new(exercise_params)
     @exercise.workout_id = params[:workout_id]
-    
+
     respond_to do |format|
       if @exercise.save
         format.turbo_stream
@@ -47,7 +47,7 @@ class ExercisesController < ApplicationController
     @exercise.destroy!
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(workout_exercise_path(@workout, @exercise))}
+      format.turbo_stream
       format.html { redirect_to url_for(controller: 'workouts', action: 'my_workouts', params: {workout_id: @workout.id}), notice: "Exercise was successfully destroyed." }
       format.json { head :no_content }
     end
@@ -84,6 +84,6 @@ class ExercisesController < ApplicationController
 
     def check_author
       @workout ||= Workout.find params[:workout_id]
-      redirect_to my_workouts_path params[:id] if current_user != @workout.user
+      redirect_to my_workouts_path if current_user != @workout.user
     end
 end

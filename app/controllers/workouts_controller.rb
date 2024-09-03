@@ -3,7 +3,7 @@ include GeminiAssistant
 class WorkoutsController < ApplicationController
     before_action :authenticate_user!, except: %i[ index ]
     before_action :set_workout, only: %i[ show destroy evaluate_workout suggest_exercise_based_on_type ]
-    before_action :check_author, only: :destroy
+    before_action :check_author, only: [:destroy, :evaluate_workout, :suggest_exercise_based_on_type]
 
     def index
         # Select Workouts that have exercises in them
@@ -60,6 +60,6 @@ class WorkoutsController < ApplicationController
 
     def check_author
         @workout ||= Workout.find params[:id]
-        redirect_to my_workouts if current_user != @workout.user
+        redirect_to my_workouts_path if current_user != @workout.user
     end
 end

@@ -70,7 +70,10 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  # This gem is commented out because it causes a version mismatch issue in Github action 
+  # https://github.com/dacraw/workout-recorder/actions/runs/10657968083/job/29538396794
+  # Ideally, this gem should be included and the Github action issue resolved independently
+  # gem "error_highlight", "~> 0.6.0", platforms: [:ruby]
 
   gem "bullet"
 end
@@ -79,6 +82,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rails-controller-testing"
 end
 
 gem "devise", "~> 4.9"

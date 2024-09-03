@@ -1,0 +1,61 @@
+# Template from: https://github.com/actions/starter-workflows/blob/main/ci/rubyonrails.yml
+
+# This workflow uses actions that are not certified by GitHub.  They are
+# provided by a third-party and are governed by separate terms of service,
+# privacy policy, and support documentation.
+#
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
+
+# ignore pushes to main branch
+name: "RSpec"
+on:
+  push:
+    branches-ignore: [$default-branch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: workout_recorder_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/workout_recorder_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1 # from https://github.com/ruby/setup-ruby
+        with:
+          bundler-cache: true
+      - name: Set up database schema
+        run: bundle exec rails db:prepare
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile # TODO: cache this
+      - name: Run tests
+        run: bundle exec rspec
+
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #     - name: Install Ruby and gems
+  #       uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+  #       with:
+  #         bundler-cache: true
+  #     - name: Generate binstubs
+  #       run: bundle binstubs bundler-audit brakeman rubocop
+  #     # Add or replace any other lints here
+  #     - name: Security audit dependencies
+  #       run: bin/bundler-audit --update
+  #     - name: Security audit application code
+  #       run: bin/brakeman -q -w2
+  #     - name: Lint Ruby files
+  #       run: bin/rubocop --parallel

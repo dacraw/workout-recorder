@@ -19,16 +19,9 @@ class Exercise < ApplicationRecord
     has_many :exercise_sets, dependent: :destroy
 
     validates_presence_of :name
-    
+
     def gemini_response_html
         markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
         markdown.render self.gemini_response
-    end
-
-    def get_and_set_gemini_response_html
-        response = evaluate_exercise_name_and_description self.name, self.description
-        self.update_column :gemini_response, response
-
-        gemini_response_html
     end
 end
