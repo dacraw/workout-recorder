@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       get 'evaluate_workout', to: "workouts#evaluate_workout"
       post 'suggest_exercise_based_on_type', to: "workouts#suggest_exercise_based_on_type"
+      post "suggest_workout_based_on_type", to: "workouts#suggest_workout_based_on_type"
     end
 
     resources :exercises do

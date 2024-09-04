@@ -7,6 +7,9 @@
                     <%= form.button class: "btn-primary", data: { turbo_frame: "modal", turbo_prefetch: false }, formaction: suggest_exercise_based_on_type_workout_path(workout) do %>
                         Suggest Exercise
                     <% end %>
+                    <%= form.button class: "btn-primary", data: { turbo_frame: "modal", turbo_prefetch: false }, formaction: suggest_workout_based_on_type_workout_path(workout) do %>
+                        Suggest Workout
+                    <% end %>
                 </div>
             <% end %>
         </div>

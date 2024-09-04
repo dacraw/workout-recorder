@@ -1,5 +1,5 @@
 <div class="inline-flex gap-2 flex-wrap select-none" data-controller="tag">
-    <%= form.hidden_field :exercise_prompt, data: { tag_target: "taglist" } %>
+    <%= form.hidden_field :prompt, data: { tag_target: "taglist" } %>
     <% Exercise::EXERCISE_TAGS.each do |tag| %>
         <div class="p-2 bg-blue-500 rounded-md cursor-pointer" data-action="click->tag#toggleTag">
             <%= button_tag tag, class: "pointer-cursor", type: :button %>
