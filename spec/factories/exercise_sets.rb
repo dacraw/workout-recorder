@@ -9,6 +9,6 @@ FactoryBot.define do
   end
 
   trait :with_weight do
-    weight { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
+    weight { Faker::Number.number(digits: 3) }
   end
 end

@@ -175,5 +175,53 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
         expect(page).to have_content "Set: #{reps} reps, #{weight.to_f} lbs"
       }.to change { ExerciseSet.count }.from(0).to(1)
     end
+
+    it "allows the user to edit an existing exercise set" do
+      exercise = create :exercise, :with_a_description, :with_exercise_sets, exercise_set_traits: [:with_reps, :with_weight]
+
+      sign_in exercise.user
+
+      visit my_workouts_path
+
+      workout_date_formatted = exercise.workout.date.strftime("%Y-%m-%d")
+      expect(page).to have_button 
+      click_button workout_date_formatted
+
+      expect(page).to have_button exercise.name
+      click_button exercise.name
+
+      # Wait for the exercise set index to be on the page, then scroll to it to trigger turbo loads on set info
+      expect(page).to have_selector "#exercise_sets_exercise_#{exercise.id}", visible: :all
+      scroll_to find("#exercise_sets_exercise_#{exercise.id}", visible: :all)
+      
+      # With the turbo frame in view, the set info will load into the page
+      exercise_set = exercise.exercise_sets.last
+      expect(page).to have_content "Set: #{exercise_set.reps} reps, #{exercise_set.weight.to_f} lbs"
+
+      # Open the edit form
+      expect(page).to have_link href: edit_workout_exercise_exercise_set_path(exercise.workout, exercise, exercise_set)
+      click_link href: edit_workout_exercise_exercise_set_path(exercise.workout, exercise, exercise_set)
+      
+      expect(page).to have_selector("#info_exercise_set_#{exercise_set.id}")
+
+      reps = 10
+      weight = 50.25
+      within find("#info_exercise_set_#{exercise_set.id}").find("form") do
+        rep_input_name = "exercise_set[reps]"
+        weight_input_name = "exercise_set[weight]"
+
+        expect(find("input[name=\"#{rep_input_name}\"").value).to eq exercise_set.reps.to_s
+        expect(find("input[name=\"#{weight_input_name}\"").value).to eq exercise_set.weight.to_s
+
+        fill_in rep_input_name, with: reps
+        fill_in weight_input_name, with: weight
+        
+        click_button "Update"
+      end
+
+      expect(page).to have_content "Set: #{reps} reps, #{weight.to_f} lbs"
+      expect(exercise_set.reload.reps).to eq reps
+      expect(exercise_set.reload.weight).to eq weight
+    end
   end
 end
