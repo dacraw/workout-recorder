@@ -67,6 +67,54 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
       expect(page).not_to have_content suggested_exercise_stub
       expect(page).not_to have_content "Selected Muscle Groups: #{muscle_groups.join(',')}"
     end
+
+    context "when there are exercises" do
+      it "provides a workout analysis" do
+        workout = create :workout, :with_exercises, user: user
+        workout_date_formatted = workout.date.strftime("%Y-%m-%d")
+
+        evaluation_stub_text = "This workout targeted the abs and legs."
+
+        expect(GeminiAssistant).to receive(:evaluate_workout).with(workout.id) { evaluation_stub_text }
+
+        visit my_workouts_path
+
+        expect(page).to have_button workout_date_formatted
+        click_button workout_date_formatted
+
+        expect(page).to have_button "Toggle Workout Analysis"
+        click_button "Toggle Workout Analysis"
+
+        expect(page).to have_link "Generate Workout Analysis"
+        click_link "Generate Workout Analysis"
+
+        expect(page).to have_content evaluation_stub_text
+      end
+    end
+
+    context "when there are not exercises" do
+      it "the workout cannot be analyzed" do
+        workout = create :workout, user: user
+        workout_date_formatted = workout.date.strftime("%Y-%m-%d")
+
+        evaluation_stub_text = "Please add exercises to this workout before evaluating it."
+
+        expect(GeminiAssistant).to receive(:evaluate_workout).with(workout.id) { evaluation_stub_text }
+
+        visit my_workouts_path
+
+        expect(page).to have_button workout_date_formatted
+        click_button workout_date_formatted
+
+        expect(page).to have_button "Toggle Workout Analysis"
+        click_button "Toggle Workout Analysis"
+
+        expect(page).to have_link "Generate Workout Analysis"
+        click_link "Generate Workout Analysis"
+
+        expect(page).to have_content evaluation_stub_text
+      end
+    end
   end
 
   context "exercises" do
