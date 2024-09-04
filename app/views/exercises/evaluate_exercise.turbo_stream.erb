@@ -1,5 +1,3 @@
-<%= turbo_stream.replace(dom_id(@exercise, "evaluation")) do %>
-    <div id="<%= dom_id(@exercise, "evaluation") %>">
-        <%= @exercise.gemini_response %>
-    </div>
+<%= turbo_stream.update(dom_id(@exercise, "evaluation")) do %>
+    <%= sanitize @exercise.gemini_response_html %>
 <% end %>
