@@ -68,11 +68,27 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
       expect(page).not_to have_content "Selected Muscle Groups: #{muscle_groups.join(',')}"
     end
 
-    context "when there are exercises" do
-      it "provides a workout analysis" do
-        workout = create :workout, :with_exercises, user: user
-        workout_date_formatted = workout.date.strftime("%Y-%m-%d")
+    it "allows the user to delete a workout" do
+      workout = create :workout, user: user
+      workout_date_formatted = workout.date.strftime("%Y-%m-%d")
+      visit my_workouts_path
 
+      expect(page).to have_button workout_date_formatted
+
+      accept_confirm do
+        find("svg[data-icon=\"trash-can\"]").click
+      end
+      
+      expect(page).to have_content "Workout was successfully destroyed."
+
+      expect(page).not_to have_button workout_date_formatted
+    end
+
+    context "when there are exercises" do
+      let!(:workout) { create :workout, :with_exercises, user: user }
+      let(:workout_date_formatted) { workout.date.strftime("%Y-%m-%d") }
+
+      it "provides a workout analysis" do
         evaluation_stub_text = "This workout targeted the abs and legs."
 
         expect(GeminiAssistant).to receive(:evaluate_workout).with(workout.id) { evaluation_stub_text }
@@ -89,6 +105,26 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
         click_link "Generate Workout Analysis"
 
         expect(page).to have_content evaluation_stub_text
+      end
+
+      it "allows a user to delete an exercise" do
+        visit my_workouts_path
+
+        expect(page).to have_button workout_date_formatted
+        click_button workout_date_formatted
+
+        exercise = workout.exercises.first
+        expect(page).to have_button exercise.name
+        click_button exercise.name
+
+        expect {
+          accept_confirm do
+            click_button "Delete Exercise"
+          end
+
+          expect(page).not_to have_button exercise.name
+          
+        }.to change {workout.reload.exercises.size}.by(-1)
       end
     end
 
@@ -270,6 +306,36 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
       expect(page).to have_content "Set: #{reps} reps, #{weight.to_f} lbs"
       expect(exercise_set.reload.reps).to eq reps
       expect(exercise_set.reload.weight).to eq weight
+    end
+
+    it "allows the user to delete an existing exercise set" do
+      exercise_set = create :exercise_set, :with_reps
+
+      sign_in exercise_set.user
+
+      visit my_workouts_path
+
+      expect(page).to have_button exercise_set.exercise.workout.date.strftime("%Y-%m-%d")
+      click_button exercise_set.exercise.workout.date.strftime("%Y-%m-%d")
+
+      expect(page).to have_button exercise_set.exercise.name
+      click_button exercise_set.exercise.name
+
+      expect(page).to have_content "Evaluate Exercise"
+      scroll_to(find_button(exercise_set.exercise.name))
+      
+      expect(page).to have_content "Set: #{exercise_set.reps} reps"
+      
+      scroll_to(find("turbo-frame#info_exercise_set_#{exercise_set.id}"))
+      within("turbo-frame#info_exercise_set_#{exercise_set.id}") do
+        accept_confirm do
+          find("svg[data-icon=\"trash-can\"]").click
+        end
+      end
+      
+      expect(page).not_to have_selector("turbo-frame#info_exercise_set_#{exercise_set.id}")
+      debugger
+
     end
   end
 end
