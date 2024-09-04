@@ -102,12 +102,12 @@ module GeminiAssistant
 
         begin
             bot.eval(<<-HEREDOC
-                Suggest a 30-minute workout that includes the following muscle groups: #{type}
+                Provide a list of exercises that includes the following muscle groups: #{type}
 
-                The suggested workout should not include any of these exercises:
+                The list should not include any of these exercises:
                 #{existing_exercise_info}
 
-                Please provide only the exercise name and sets/reps, separated by a hyphen. Please provide at least one exercise per muscle group. 
+                Please provide each list item as the exercise name (in bold text) and its sets/reps, separated by a hyphen. Please provide at least one exercise per muscle group. 
             HEREDOC
             )
         rescue StandardError => e 
