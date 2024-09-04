@@ -6,6 +6,8 @@ module GeminiAssistant
             workout = Workout.includes(:exercises).find_by(id: workout_id)
             exercises = workout.exercises
 
+            return "Please add exercises to this workout before evaluating it." if exercises.size == 0
+
             exercise_text = exercises.map {|exercise| "exercise name: #{exercise.name}, exercise description: #{exercise.description}"}.join(";")
 
             heredoc_text = <<-HEREDOC
