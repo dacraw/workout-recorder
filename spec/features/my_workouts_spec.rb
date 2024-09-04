@@ -146,4 +146,34 @@ RSpec.feature "MyWorkouts", type: :feature, js: true do
       }.to change { exercise.reload.gemini_response }.from(nil).to(evaluation_stub)
     end
   end
+
+  context "exercise sets" do
+    it "creates an exercise set for an existing exercise" do
+      exercise = create :exercise, :with_a_description
+
+      sign_in exercise.user
+
+      expect {
+        visit my_workouts_path
+  
+        expect(page).to have_button exercise.workout.date.strftime("%Y-%m-%d")
+        click_button exercise.workout.date.strftime("%Y-%m-%d")
+  
+        expect(page).to have_button exercise.name
+        click_button exercise.name
+  
+        expect(page).to have_content exercise.description
+  
+        reps = 10
+        weight = 120
+        within("form[action=\"#{workout_exercise_exercise_sets_path(exercise.workout, exercise)}\"") do
+          fill_in "exercise_set[reps]", with: reps
+          fill_in "exercise_set[weight]", with: weight
+        end
+  
+        click_button "Add Set"
+        expect(page).to have_content "Set: #{reps} reps, #{weight.to_f} lbs"
+      }.to change { ExerciseSet.count }.from(0).to(1)
+    end
+  end
 end
