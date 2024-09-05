@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :workouts, only: [:index, :create, :show, :destroy] do
     member do
       get 'evaluate_workout', to: "workouts#evaluate_workout"
-      get 'suggest_exercise_based_on_type', to: "workouts#suggest_exercise_based_on_type"
+      post 'suggest_exercise_based_on_type', to: "workouts#suggest_exercise_based_on_type"
+      post "suggest_workout_based_on_type", to: "workouts#suggest_workout_based_on_type"
     end
 
     resources :exercises do

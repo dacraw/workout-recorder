@@ -96,4 +96,23 @@ module GeminiAssistant
             "There was a safety issue evaluating the exercise - please ensure you are using appropriate language and try editing then saving the exercise to re-generate an analysis."
         end
     end
+
+    def self.suggest_workout_based_on_type(type, existing_exercise_info)
+        bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
+
+        begin
+            bot.eval(<<-HEREDOC
+                Provide a list of exercises that includes the following muscle groups: #{type}
+
+                The list should not include any of these exercises:
+                #{existing_exercise_info}
+
+                Please provide each list item as the exercise name (in bold text) and its sets/reps, separated by a hyphen. Please provide at least one exercise per muscle group. 
+            HEREDOC
+            )
+        rescue StandardError => e 
+            puts "Error with suggest_workout_based_on_type: #{e}"
+            "There was an issue suggesting the workout - please try evaluating again, or change the selected muscle groups."
+        end
+    end
 end

@@ -2,8 +2,8 @@ include GeminiAssistant
 
 class WorkoutsController < ApplicationController
     before_action :authenticate_user!, except: %i[ index ]
-    before_action :set_workout, only: %i[ show destroy evaluate_workout suggest_exercise_based_on_type ]
-    before_action :check_author, only: [:destroy, :evaluate_workout, :suggest_exercise_based_on_type]
+    before_action :set_workout, only: %i[ show destroy evaluate_workout suggest_exercise_based_on_type suggest_workout_based_on_type ]
+    before_action :check_author, only: %i[destroy evaluate_workout suggest_exercise_based_on_type suggest_workout_based_on_type]
 
     def index
         # Select Workouts that have exercises in them
@@ -45,11 +45,19 @@ class WorkoutsController < ApplicationController
     end
 
     def suggest_exercise_based_on_type
-        response = GeminiAssistant.suggest_exercise_based_on_type(params[:exercise_prompt], @workout.exercises.map {|exercise| "name: #{exercise.name}, description: #{exercise.description}"}.join(';'))
+        response = GeminiAssistant.suggest_exercise_based_on_type(params[:prompt], @workout.exercises.map {|exercise| "name: #{exercise.name}, description: #{exercise.description}"}.join(';'))
 
-        @selected_tags = params[:exercise_prompt]
+        @selected_tags = params[:prompt]
 
         rc = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+        @html_response = rc.render response
+    end
+
+    def suggest_workout_based_on_type
+        response = GeminiAssistant.suggest_workout_based_on_type(params[:prompt], @workout.exercises.map {|exercise| "name: #{exercise.name}, description: #{exercise.description}"}.join(';'))
+        @selected_tags = params[:prompt]
+        
+        rc = Redcarpet::Markdown.new(Redcarpet::Render::HTML, hard_wrap: true)
         @html_response = rc.render response
     end
 
