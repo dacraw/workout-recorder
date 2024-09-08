@@ -1,0 +1,20 @@
+<!-- make the title dynamic -->
+<%= render "modal", title: "Suggestion" do %>
+    <div class="mb-2">
+        <%= form_with method: :get do |form| %>
+            <%= render "application/tag_selector", form: form %>
+            <div class="m-0 mb-6 md:mt-2">
+                <%= form.button class: "m-0 mt-2 btn-primary", data: { turbo_prefetch: false }, formaction: suggest_exercises_path do %>
+                    Suggest Exercise
+                <% end %>
+                <%= form.button class: "m-0 mt-2 btn-primary", data: { turbo_frame: "modal", turbo_prefetch: false, turbo_frame: "chatbot-response" }, formaction: suggest_workout_path do %>
+                    Suggest Workout
+                <% end %>
+            </div>
+        <% end %>
+        
+        <%= turbo_frame_tag "chatbot-response" do %>
+            <p>Select at least one muscle group above then click the button below</p>
+        <% end %>
+    </div>
+<% end %>
