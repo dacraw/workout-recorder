@@ -7,7 +7,7 @@
                 <%= form.button class: "m-0 mt-2 btn-primary", data: { turbo_prefetch: false }, formaction: suggest_exercises_path do %>
                     Suggest Exercise
                 <% end %>
-                <%= form.button class: "m-0 mt-2 btn-primary", data: { turbo_frame: "modal", turbo_prefetch: false, turbo_frame: "chatbot-response" }, formaction: suggest_workout_path do %>
+                <%= form.button class: "m-0 mt-2 btn-primary", data: { turbo_prefetch: false, turbo_frame: "chatbot-response" }, formaction: suggest_workout_path do %>
                     Suggest Workout
                 <% end %>
             </div>
