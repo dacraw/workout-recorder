@@ -1,7 +1,7 @@
 include GeminiAssistant
 
 class ExercisesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_exercise, only: %i[ show edit update destroy ]
   before_action :set_workout
   before_action :check_author, except: [:index, :show]
