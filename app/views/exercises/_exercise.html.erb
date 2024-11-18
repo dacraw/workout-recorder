@@ -13,12 +13,16 @@
     <%= exercise.name %>
   </p>
 
-  <p>
-    <span class="font-bold">Description:</span>
-    <%= exercise.description %>
-  </p>
+  <% if exercise.description.present? %>
+    <p>
+      <span class="font-bold">Description:</span>
+      <%= exercise.description %>
+    </p>
+  <% end %>
 
-  <%= link_to "Evaluate Exercise", workout_exercise_evaluate_exercise_path(workout, exercise), data: { turbo_frame: dom_id(exercise, "evaluation"), turbo_stream: true}, class: "btn-primary" %>
+  <% if current_user == workout.user %>
+    <%= link_to "Evaluate Exercise", workout_exercise_evaluate_exercise_path(workout, exercise), data: { turbo_frame: dom_id(exercise, "evaluation"), turbo_stream: true}, class: "btn-primary" %>
+  <% end %>
 
   <div>
     <%= turbo_frame_tag dom_id(exercise, "evaluation"), class: "[&[busy]]:blur-sm [&[busy]+div]:block" do %>
