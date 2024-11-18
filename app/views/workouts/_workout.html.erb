@@ -30,10 +30,12 @@
         <% end %>    
     </div>
 
-    <div class="my-2">
-        <%= button_to workout, method: :delete, type: :button, data: { confirm: 'Are you sure?', turbo_confirm: "Are you sure?"}, class: "text-red-600 font-bold" do %>
-            <span class="">Delete Workout</span>
-            <i class="fa-regular fa-trash-can cursor-pointer"></i>
-        <% end %>
-    </div>
+    <% if current_user == workout.user && current_page?(my_workouts_path) %>
+        <div class="my-2">
+            <%= button_to workout, method: :delete, type: :button, data: { confirm: 'Are you sure?', turbo_confirm: "Are you sure?"}, class: "text-red-600 font-bold" do %>
+                <span class="">Delete Workout</span>
+                <i class="fa-regular fa-trash-can cursor-pointer"></i>
+            <% end %>
+        </div>
+    <% end %>
 </div>
