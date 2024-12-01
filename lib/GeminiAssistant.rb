@@ -78,7 +78,7 @@ module GeminiAssistant
         bot.eval(prompt)
     end
 
-    def self.suggest_exercise_based_on_type(type, existing_exercise_info)
+    def self.suggest_exercise_based_on_type(type, existing_exercise_info = "")
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
         begin
@@ -97,7 +97,7 @@ module GeminiAssistant
         end
     end
 
-    def self.suggest_workout_based_on_type(type, existing_exercise_info)
+    def self.suggest_workout_based_on_type(type, existing_exercise_info = "")
         bot = NanoBot.new(cartridge: CARTRIDGE_CONFIG)
 
         begin

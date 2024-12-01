@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "chatbot-response" do %>
+    <div class="p-4" data-controller="turbo-modal" data-action="click@window->turbo-modal#closeBackground" data-turbo-modal-target="modal">
+        <p class="mb-2"><strong class="font-bold">Selected Muscle Groups:</strong> <%= @selected_tags %></p>
+        <div class="mb-2 whitespace-pre-wrap flex flex-col leading-5 [&>p]:mb-2 border-t-2 pt-2"><%= sanitize @html_response %></div>
+    </div>
+<% end %>

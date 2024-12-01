@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  # Gemini controller
+  get "tag_selector", to: "gemini#tag_selector"
+  get "suggest_exercises", to: "gemini#suggest_exercises"
+  get "suggest_workout", to: "gemini#suggest_workout"
+
   resources :workouts, only: [:index, :create, :show, :destroy] do
     member do
       get 'evaluate_workout', to: "workouts#evaluate_workout"
